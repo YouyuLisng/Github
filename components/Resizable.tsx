@@ -178,7 +178,7 @@ export function Resizable() {
                 <ResizablePanel defaultSize={75}>
                     <div className="grid grid-cols-1 gap-3 p-4 bg-white">
                         {repos.map((repo: Repository, index: number) => (
-                            <div className="border-b" key={index}>
+                            <article className="border-b" key={index}>
                                 <div className="py-2 px-3">
                                     <div className="flex justify-between items-center">
                                         <div className='flex items-center'>
@@ -190,8 +190,8 @@ export function Resizable() {
                                         </div>
                                     </div>
                                     <div className="py-3">
-                                        <p className="text-xl">{repo.name}</p>
-                                        <p className="text-md text-zinc-500 truncate">{repo.description}</p>
+                                        <p className="text-xl mb-2">{repo.name}</p>
+                                        <p className="text-sm text-zinc-500 truncate">{repo.description}</p>
                                     </div>
                                     <div className='flex items-center'>
                                         <IoCodeSlashOutline className='w-5 h-5 me-2 text-red-500' />
@@ -208,7 +208,7 @@ export function Resizable() {
                                         )}
                                     </div>
                                 </div>
-                            </div>
+                            </article>
                         ))}
                         {loading && <Loader />}
                     </div>
