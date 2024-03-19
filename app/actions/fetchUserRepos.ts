@@ -1,4 +1,4 @@
-async function fetchRepos(username: string, pageNumber = 1, perPage = 10) {
+async function fetchUserRepos(username: string, pageNumber: number, perPage = 10) {
     try {
         const headers = new Headers();
         headers.append('Accept', 'application/vnd.github.v3+json');
@@ -12,7 +12,7 @@ async function fetchRepos(username: string, pageNumber = 1, perPage = 10) {
         }
 
         const data = await response.json();
-
+        console.log(data, `data: ${pageNumber}`)
         return data; // Return the response data
     } catch (error) {
         console.error('Error fetching user repositories:', error);
@@ -20,4 +20,4 @@ async function fetchRepos(username: string, pageNumber = 1, perPage = 10) {
     }
 }
 
-export default fetchRepos;
+export default fetchUserRepos;

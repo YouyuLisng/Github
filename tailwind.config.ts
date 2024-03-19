@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        'login-image': 'url("/images/1280.jpg")',
+        'home-banner': 'url("/images/bg/cookie.jpg")',
+      },
       colors: {
         bgblue: "#00324e",
         btnblue: "#3397cf",

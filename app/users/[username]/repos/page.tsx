@@ -1,6 +1,8 @@
 import React from 'react'
 import fetchUserRepos from '@/app/actions/fetchUserRepos'
 import fetchUser from '@/app/actions/fetchUser'
+import Avatar from '@/components/Avatar';
+import { UserRepoList } from '@/components/UserRepoList/UserRepoList';
 
 interface ReposPageProps {
     params: {
@@ -9,10 +11,20 @@ interface ReposPageProps {
 }
 export default async function ReposPage({ params: { username } } : ReposPageProps) {
     const user = await fetchUser(username);
-    const userRepo = await fetchUserRepos(username);
     return (
-        <div className='max-w-[760px] min-h-[300px] rounded-xl mx-auto bg-white'>
-            <p className='text-black'>{user.items[0].login}</p>
-        </div>
+        <>
+            <div className='max-w-[760px] mx-auto md:px-2 px-2 bg-white'>
+                <div className='max-w-[760px] min-h-[250px] rounded-xl'>
+                    <img className='w-full h-full rounded-xl' src="/images/1280.jpg" alt="" />
+                </div>
+                <div className='p-6'>
+                    <div className='flex items-center'>
+                        <Avatar src={user.items[0].avatar_url} width={40} height={40} />
+                        <p className="px-4 text-2xl font-bold">{user.items[0].login}</p>
+                    </div>
+                    <UserRepoList username={username} />
+                </div>
+            </div>
+        </>
     )
 }
