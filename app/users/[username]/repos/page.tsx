@@ -10,7 +10,6 @@ interface ReposPageProps {
 export default async function ReposPage({ params: { username } } : ReposPageProps) {
     const user = await fetchUser(username);
     const userRepo = await fetchUserRepos(username);
-    console.log(user, 'user')
     return (
         <div className='max-w-[760px] min-h-[300px] rounded-xl mx-auto bg-white'>
             <p className='text-black'>{user.items[0].login}</p>

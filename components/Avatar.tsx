@@ -10,8 +10,8 @@ interface AvatarProps {
     return ( 
         <Image 
             className="rounded-full" 
-            height="20" 
             width="20" 
+            height="20" 
             alt="Avatar" 
             src={src || '/images/placeholder.jpeg'}
         />
