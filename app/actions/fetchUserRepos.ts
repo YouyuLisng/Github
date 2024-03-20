@@ -5,8 +5,8 @@ async function fetchUserRepos(username: string, pageNumber: number, perPage = 10
     try {
         const headers = new Headers();
         headers.append('Accept', 'application/vnd.github.v3+json');
-
-        const response = await fetch(`https://api.github.com/users/${username}/repos?per_page=${perPage}`, {
+        headers.append('Authorization', 'Bearer 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');
+        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=created&per_page=${perPage}&page=${pageNumber}`, {
             headers: headers
         });
 
