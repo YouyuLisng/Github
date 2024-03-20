@@ -19,15 +19,18 @@ export function WarningDialog({
     isOpen
 }: WarningDialogProps) {
     return (
-        <AlertDialog open={true}>
-            <AlertDialogContent >
-                <AlertDialogHeader>
-                    <AlertDialogTitle>你滑的太快了！</AlertDialogTitle>
-                    <AlertDialogDescription>
-                        請稍後再繼續瀏覽~~
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-            </AlertDialogContent>
-        </AlertDialog>
+        <AlertDialog defaultOpen={true}>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                        <AlertDialogTitle>此頁面暫時不開放！</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            若要了解詳情，請聯繫客服人員
+                        </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogAction>關閉</AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
     )
 }

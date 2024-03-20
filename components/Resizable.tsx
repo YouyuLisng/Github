@@ -1,13 +1,12 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-
+import fetchRepos from '@/app/actions/fetchRepos';
 import Category from "./Category"
 import { FaNodeJs, FaReact, FaVuejs, FaAngular } from "react-icons/fa";
 import { TbBrandNextjs } from "react-icons/tb";
 import { RepoList } from './RepoList/RepoList';
 
 
-export function Resizable() {
+export async function Resizable() {
+    const repos = await fetchRepos(1, 10);
     return (
         <>
             <div className='grid grid-cols-1 md:grid-cols-[_2fr,_8fr]'>
@@ -20,7 +19,7 @@ export function Resizable() {
                         <Category Icon={<TbBrandNextjs className="w-4 h-4 me-2" />} label={"Next JS"} />
                     </div>
                 </div>
-                <RepoList />
+                <RepoList repo={repos} />
             </div>
         </>
     )

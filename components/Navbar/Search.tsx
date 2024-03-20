@@ -1,7 +1,6 @@
 "use client"
 import React from 'react'
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 import { IoSearchOutline } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
@@ -31,7 +30,6 @@ export default function Search() {
         }
     });
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
         route.push(`/users/${values.text}/repos`);
     };
 
