@@ -6,7 +6,7 @@ import { RepoList } from './RepoList/RepoList';
 
 
 export async function Resizable() {
-    const repos = await fetchRepos(1, 10);
+    const repos = await fetchRepos(1);
     return (
         <>
             <div className='grid grid-cols-1 md:grid-cols-[_2fr,_8fr]'>

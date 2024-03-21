@@ -3,7 +3,7 @@ async function fetchRepos(username: string) {
         const headers = new Headers();
         headers.append('Accept', 'application/vnd.github.v3+json');
 
-        const response = await fetch(`https://api.github.com/search/users?q=${username}`, {
+        const response = await fetch(`https://api.github.com/users/${username}`, {
             headers: headers
         });
 

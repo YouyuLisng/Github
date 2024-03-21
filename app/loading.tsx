@@ -2,7 +2,9 @@ import Loader from "@/components/Loader";
 
 const PageLoad = () => {
     return (
-        <Loader />
+        <div className="h-[70vh] flex flex-col justify-center items-center">
+            <Loader />
+        </div>
     );
 }
 
