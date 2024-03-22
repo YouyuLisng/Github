@@ -12,8 +12,8 @@ export default function Time({ time }: TimeProps) {
     };
 
     return (
-        <div>
+        <>
             <p className='text-sm text-zinc-500'>{formatDate(time)}</p>
-        </div>
+        </>
     )
 }
