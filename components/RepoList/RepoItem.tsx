@@ -23,7 +23,7 @@ function RepoItem({
                             <Avatar src={repo.owner.avatar_url} width={20} height={20} />
                             <p className="px-2 text-sm text-zinc-500">{repo.owner.login}</p>
                         </div>
-                        <Time time={repo.created_at} />
+                        {/* <Time time={repo.created_at} /> */}
                     </div>
                     <div className="py-3">
                         <p className="text-md md:text-xl mb-2">{repo.name}</p>
