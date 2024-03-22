@@ -1,4 +1,3 @@
-import Container from "@/components/Container";
 import { Resizable } from "@/components/Resizable";
 import type { Metadata } from "next";
 

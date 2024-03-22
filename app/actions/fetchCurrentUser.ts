@@ -1,9 +1,10 @@
-async function fetchMarkdown(username: string, repo: string) {
+async function fetchCurrentUser(accessToken: string) {
     try {
         const headers = new Headers();
+        headers.append('Authorization', `Bearer ${accessToken}`);
         headers.append('Accept', 'application/vnd.github.v3+json');
 
-        const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/README.md`, {
+        const response = await fetch('https://api.github.com/user', {
             headers: headers
         });
 
@@ -13,11 +14,11 @@ async function fetchMarkdown(username: string, repo: string) {
 
         const data = await response.json();
 
-        return data; // Return the response data
+        return data;
     } catch (error) {
-        console.error('Error', error);
+        console.error('Error fetching user data:', error);
         return null;
     }
 }
 
-export default fetchMarkdown;
+export default fetchCurrentUser;

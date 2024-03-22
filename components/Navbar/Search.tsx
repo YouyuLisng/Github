@@ -37,7 +37,7 @@ export default function Search() {
         <>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="flex justify-center items-center px-8">
+                    <div className="flex justify-center items-center md:px-8 px-4">
                         <FormField
                             control={form.control}
                             name="text"
@@ -45,7 +45,7 @@ export default function Search() {
                             <FormItem>
                                 <FormControl>
                                 <Input
-                                    className='w-[550px] h-[30px] rounded-none focus-visible:ring-0 focus-visible:ring-offset-0'
+                                    className='md:w-[450px] h-[30px] rounded-none focus-visible:ring-0 focus-visible:ring-offset-0'
                                     placeholder="搜尋關鍵字"
                                     {...field}
                                 />

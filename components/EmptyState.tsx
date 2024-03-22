@@ -10,7 +10,7 @@ interface EmptyStateProps {
 
 const EmptyState: React.FC<EmptyStateProps> = ({
     title = 'Oops！',
-    subtitle = '此頁面目前尚未開放！',
+    subtitle = 'Not Found',
     showReaet = true
 }) => {
     const router = useRouter();
@@ -25,7 +25,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
                 {showReaet &&(
                     <Button 
                         outline
-                        label="返回首頁"
+                        label="返回"
                         onClick={() => router.push('/') }
                     />
                 )}
