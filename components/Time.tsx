@@ -1,24 +1,19 @@
-
-import React, { useMemo } from 'react';
-import { format } from 'date-fns';
+import React from 'react'
+import { format, parseISO } from 'date-fns';
 
 interface TimeProps {
     time: string;
 }
 
-const Time = ({ time }: TimeProps) => {
+export default function Time({ time }: TimeProps) {
     const formatDate = (dateString: string) => {
-        const date = new Date(dateString);
+        const date = parseISO(dateString);
         return format(date, 'yyyy-MM-dd');
     };
 
-    const formattedTime = useMemo(() => {
-        return formatDate(time);
-    }, [time]);
-
     return (
-        <p className='text-sm text-zinc-500'>{formattedTime}</p>
-    );
+        <div>
+            <p className='text-sm text-zinc-500'>{formatDate(time)}</p>
+        </div>
+    )
 }
-
-export default Time;
