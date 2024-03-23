@@ -5,32 +5,68 @@ import { useRouter } from 'next/navigation';
 import getCurrentUser from '@/app/actions/fetchCurrentUser';
 import Avatar from "../Avatar";
 import { GitHubUser } from '@/type/type';
+import { useAuthContext } from '@/Context/auth'
 
-interface UserMenuProps {
-    currentUser?: GitHubUser | null
-}
-
-const UserMenu = ({
-    currentUser
-}: UserMenuProps) => {
+const UserMenu = () => {
     const router = useRouter();
+    
+    const { accessToken, setAccessToken, handleGitHubLogin } = useAuthContext();
+    const [currentUser, setCurrentUser] = useState<GitHubUser | null>(null);
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = useCallback(() => {
         setIsOpen(prevState => !prevState);
     }, []);
 
-    const handleGitHubLogin = () => {
-        const clientId = '1d6c5925798aa7391380';
-        const redirectUri = 'http://localhost:3000/';
-        const scope = 'user';
-        const authUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+    useEffect(() => {
+        const code = new URLSearchParams(window.location.search).get('code');
+        if (code) {
+            const clientId = '1d6c5925798aa7391380';
+            const clientSecret = '9e733dd6bc55c1034ecf7b76796134f98e4e08ff';
+            const redirect_uri = 'http://localhost:3000/';
+            const data = {
+                client_id: clientId,
+                client_secret: clientSecret,
+                redirect_uri: redirect_uri,
+                code: code,
+            };
 
-        window.location.href = authUrl;
-    };
+            fetch('/api/github', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                setAccessToken(data.access_token);
+            })
+            .catch(error => {
+                console.error('Error fetching access token:', error);
+            });
+        }
+    }, []);
+
+    useEffect(() => {
+        const fetchCurrentUser = async () => {
+            if (accessToken) {
+                try {
+                    const user = await getCurrentUser(accessToken);
+                    setCurrentUser(user);
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                }
+            }
+        };
+
+        fetchCurrentUser();
+    }, [accessToken]);
 
     const handleLogout = () => {
-        sessionStorage.removeItem('accessToken');
+        setAccessToken('');
+        setCurrentUser(null);
         toggleOpen();
     };
 

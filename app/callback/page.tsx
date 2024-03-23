@@ -1,8 +1,8 @@
 import React from 'react'
-import Github from './Github'
+import GithubCallback from './GithubCallback'
 
-export default function callback() {
+export default function CallbackPgae() {
     return (
-        <Github />
+        <GithubCallback />
     )
 }

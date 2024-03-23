@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import PageLoad from '../loading';
 import { useRouter } from "next/navigation";
 
-export default function Github() {
+export default function GithubCallback() {
     const router = useRouter();
     useEffect(() => {
         const code = new URLSearchParams(window.location.search).get('code');
