@@ -13,7 +13,7 @@ export default function Time({ time }: TimeProps) {
 
     return (
         <>
-            {formatDate(time)}
+            <p className='text-sm text-zinc-500' suppressHydrationWarning={true}>{formatDate(time)}</p>
         </>
     )
 }
