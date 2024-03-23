@@ -6,7 +6,6 @@ interface TimeProps {
 }
 
 export default function Time({ time }: TimeProps) {
-    console.log(time)
     const formatDate = (dateString: string) => {
         const date = parseISO(dateString);
         return format(date, 'yyyy-MM-dd');
