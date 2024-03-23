@@ -56,7 +56,6 @@ const UserMenu = () => {
                 try {
                     const user = await getCurrentUser(accessToken);
                     setCurrentUser(user);
-                    console.log(currentUser, 'currentUser')
                 } catch (error) {
                     console.error('Error fetching user data:', error);
                 }
