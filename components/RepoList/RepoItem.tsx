@@ -1,4 +1,3 @@
-"use client"
 import React from 'react';
 import { IoCodeSlashOutline } from 'react-icons/io5';
 import Avatar from '@/components/Avatar';
@@ -7,7 +6,6 @@ import Link from 'next/link';
 import { AiFillStar } from 'react-icons/ai';
 import { LuEye } from 'react-icons/lu';
 import Time from '../Time';
-import { format, parseISO } from 'date-fns';
 
 interface RepoItemProps {
     repo: Repository;
@@ -16,10 +14,6 @@ interface RepoItemProps {
 function RepoItem({
     repo,
 }: RepoItemProps) {
-    const formatDate = (dateString: string) => {
-        const date = parseISO(dateString);
-        return format(date, 'yyyy-MM-dd');
-    };
     return (
         <Link href={`/users/${repo.owner.login}/repos/${repo.name}`}>
             <article className="border-b">
@@ -30,7 +24,6 @@ function RepoItem({
                             <p className="px-2 text-sm text-zinc-500">{repo.owner.login}</p>
                         </div>
                         <Time time={repo.created_at} />
-                        {/* <p>{formatDate(repo.created_at)}</p> */}
                     </div>
                     <div className="py-3">
                         <p className="text-md md:text-xl mb-2">{repo.name}</p>
