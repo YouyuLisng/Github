@@ -42,6 +42,7 @@ const UserMenu = () => {
             .then(response => response.json())
             .then(data => {
                 setAccessToken(data.access_token);
+                console.log(accessToken, 'accessToken')
             })
             .catch(error => {
                 console.error('Error fetching access token:', error);
@@ -55,6 +56,7 @@ const UserMenu = () => {
                 try {
                     const user = await getCurrentUser(accessToken);
                     setCurrentUser(user);
+                    console.log(currentUser, 'currentUser')
                 } catch (error) {
                     console.error('Error fetching user data:', error);
                 }
