@@ -47,7 +47,7 @@ export function RepoList({
             loadingRef.current = false;
             setLoading(false);
 
-            window.scrollTo(0, scrollPosition); // 保持滾動位置不變
+            window.scrollTo(0, scrollPosition);
         }
     };         
     
@@ -68,7 +68,7 @@ export function RepoList({
                     ))
                 ) : (
                     Array.from({ length: 10 }).map((_, index) => (
-                        <SkeletonItem key={index} /> // 使用 SkeletonItem 組件來顯示骨架內容
+                        <SkeletonItem key={index} />
                     ))
                 )}
                 {loading && <Loader />}
