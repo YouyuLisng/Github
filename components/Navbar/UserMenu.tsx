@@ -23,7 +23,7 @@ const UserMenu = () => {
         if (code) {
             const clientId = '1d6c5925798aa7391380';
             const clientSecret = '9e733dd6bc55c1034ecf7b76796134f98e4e08ff';
-            const redirect_uri = '/';
+            const redirect_uri = 'https://dcard-demo.vercel.app/';
             const data = {
                 client_id: clientId,
                 client_secret: clientSecret,
