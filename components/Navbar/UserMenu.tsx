@@ -41,7 +41,6 @@ const UserMenu = () => {
             })
             .then(response => response.json())
             .then(data => {
-                sessionStorage.setItem('accessToken', data.access_token);
                 setAccessToken(data.access_token);
             })
             .catch(error => {
@@ -67,7 +66,6 @@ const UserMenu = () => {
 
     const handleLogout = () => {
         setAccessToken('');
-        sessionStorage.setItem('accessToken', '');
         setCurrentUser(null);
         toggleOpen();
     };
