@@ -5,6 +5,16 @@
 body {
   background-color: #00324e;
 }
+
+:focus-visible {
+  outline: -webkit-focus-ring-color auto 0px !important;
+}
+/* 在你的 CSS 或者 SCSS 檔案中 */
+@layer components {
+  .react-quill-container .ql-editor {
+    min-height: 150px; /* 設置編輯區域的最小高度 */
+  }
+}
  
 @layer base {
   :root {

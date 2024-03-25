@@ -6,12 +6,19 @@ import { UserRepoList } from '@/components/UserRepoList/UserRepoList';
 import { IoIosLink } from "react-icons/io";
 import Link from 'next/link';
 import { Separator } from "@/components/ui/separator"
-
+import type { Metadata } from "next";
 interface ReposPageProps {
     params: {
         username: string;
     };
 }
+export async function generateMetadata( { params: { username } }: ReposPageProps): Promise<Metadata> {
+    const user = await fetchUser(username);
+    return {
+        title: user.login,
+    }
+}
+
 export default async function ReposPage({ params: { username } } : ReposPageProps) {
     const user = await fetchUser(username);
     const repo = await fetchUserRepos(username, 1);
@@ -32,11 +39,13 @@ export default async function ReposPage({ params: { username } } : ReposPageProp
                 <div className='px-5 py-6 md:px-10 md:py-12'>
                     <div className='px-2 md:px-4'>
                         <p className="text-md md:text-2xl font-bold">{user.login}</p>
-                        <p className='text-sm text-zinc-500'>@ {user.login}</p>
-                        <div className='flex items-center text-sm text-zinc-500'>
-                            <IoIosLink size={14} />
-                            <Link href={user.blog}>{user.blog}</Link>
-                        </div>
+                        <b className='text-sm text-zinc-500'>@ {user.login}</b>
+                        {user.blog && user.blog.trim() !== '' && ( // 檢查博客是否存在並且不是空的
+                            <div className='flex items-center text-sm text-zinc-500'>
+                                <IoIosLink size={14} />
+                                <Link href={user.blog}>{user.blog}</Link>
+                            </div>
+                        )}
                         <Separator className='my-4' />
                     </div>
                     <UserRepoList username={username} repo={repo} />

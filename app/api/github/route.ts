@@ -4,12 +4,7 @@ export async function POST(
     request: Request
 ) {
     const body = await request.json();
-
-    const {
-        client_id,
-        client_secret,
-        code,
-    } = body;
+    const { client_id, client_secret, code } = body;
 
     try {
         const response = await fetch('https://github.com/login/oauth/access_token', {

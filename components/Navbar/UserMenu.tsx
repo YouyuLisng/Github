@@ -2,16 +2,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { BiSolidDownArrow } from "react-icons/bi";
 import MenuItem from './MenuItem';
 import { useRouter } from 'next/navigation';
-import getCurrentUser from '@/app/actions/fetchCurrentUser';
 import Avatar from "../Avatar";
-import { GitHubUser } from '@/type/type';
 import { useAuthContext } from '@/Context/auth'
 
 const UserMenu = () => {
     const router = useRouter();
     
-    const { accessToken, setAccessToken, handleGitHubLogin } = useAuthContext();
-    const [currentUser, setCurrentUser] = useState<GitHubUser | null>(null);
+    const { accessToken, setAccessToken, currentUser, setCurrentUser, handleGitHubLogin } = useAuthContext();
+    // const [currentUser, setCurrentUser] = useState<GitHubUser | null>(null);
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = useCallback(() => {
@@ -23,7 +21,7 @@ const UserMenu = () => {
         if (code) {
             const clientId = '1d6c5925798aa7391380';
             const clientSecret = '9e733dd6bc55c1034ecf7b76796134f98e4e08ff';
-            const redirect_uri = 'https://dcard-demo.vercel.app/';
+            const redirect_uri = 'http://localhost:3000/';
             const data = {
                 client_id: clientId,
                 client_secret: clientSecret,
@@ -49,21 +47,6 @@ const UserMenu = () => {
         }
     }, []);
 
-    useEffect(() => {
-        const fetchCurrentUser = async () => {
-            if (accessToken) {
-                try {
-                    const user = await getCurrentUser(accessToken);
-                    setCurrentUser(user);
-                } catch (error) {
-                    console.error('Error fetching user data:', error);
-                }
-            }
-        };
-
-        fetchCurrentUser();
-    }, [accessToken]);
-
     const handleLogout = () => {
         setAccessToken('');
         setCurrentUser(null);
@@ -85,8 +68,9 @@ const UserMenu = () => {
                     <div className='flex flex-col cursor-pointer'>
                         {currentUser ? (
                             <>  
-                                <MenuItem label={currentUser.login} />
+                                <MenuItem onClick={() => router.push(`/users/${currentUser.login}/repos`)} label={currentUser.login} />
                                 <MenuItem onClick={() => router.push('/profile')} label='個人資料' />
+                                <MenuItem onClick={() => router.push('/post')} label='我的文章' />
                                 <hr />
                                 <MenuItem label='登出' onClick={handleLogout} />
                             </>

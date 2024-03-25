@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Container from "@/components/Container";
 import { AuthProvider } from '@/Context/auth';
 import EditBtn from "@/components/EditBtn";
+import ToasterProvider from '@/components/providers/ToastProvider';
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <AuthProvider>
+                    <ToasterProvider />
                     <Navbar />
                     <div className="pb-20 pt-16 relative">
                         <Container>

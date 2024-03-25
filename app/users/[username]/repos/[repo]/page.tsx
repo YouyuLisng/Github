@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Time from '@/components/Time';
 import MarkdownViewer from '@/components/Markdown';
 import EmptyState from '@/components/EmptyState';
-
+import type { Metadata } from "next";
 interface RepoPageProps {
     params: {
         username: string;
@@ -15,11 +15,17 @@ interface RepoPageProps {
     };
 }
 
+export async function generateMetadata( { params: { username, repo } }: RepoPageProps): Promise<Metadata> {
+    const RepoData = await fetchRepo(username, repo);
+    return {
+        title:`${username}/${RepoData.name}`,
+    }
+}
+
 export default async function RepoPage({ params: { username, repo } } : RepoPageProps) {
     const RepoData = await fetchRepo(username, repo);
     const MarkdownData = await fetchMarkdown(username, repo);
 
-    // 檢查 MarkdownData 是否存在並且有內容
     if (!MarkdownData || !MarkdownData.content) {
         return (
             <div className='max-w-[1320px] mx-auto md:px-2 px-2 bg-white rounded-lg'>
