@@ -12,7 +12,11 @@ interface AuthContext {
 }
 const AuthContext = createContext<AuthContext | null>(null);
 export const AuthProvider = ({ children }: AuthContextProps) => {
-    const [accessToken, setAccessToken] = useState('');
+    const [accessToken, setAccessToken] = useState<string>(() => {
+        const storedAccessToken = sessionStorage.getItem('accessToken');
+        console.log(storedAccessToken);
+        return storedAccessToken || '';
+    });
 
     const handleGitHubLogin = () => {
         const clientId = '1d6c5925798aa7391380';

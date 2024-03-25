@@ -3,7 +3,8 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Container from "@/components/Container";
-import AuthProvider from '@/Context/auth';
+import { AuthProvider } from '@/Context/auth';
+import EditBtn from "@/components/EditBtn";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -19,9 +20,10 @@ export default function RootLayout({
             <body className={inter.className}>
                 <AuthProvider>
                     <Navbar />
-                    <div className="pb-20 pt-16">
+                    <div className="pb-20 pt-16 relative">
                         <Container>
                             {children}
+                            <EditBtn />
                         </Container>
                     </div>
                 </AuthProvider>

@@ -41,8 +41,8 @@ const UserMenu = () => {
             })
             .then(response => response.json())
             .then(data => {
+                sessionStorage.setItem('accessToken', data.access_token);
                 setAccessToken(data.access_token);
-                console.log(accessToken, 'accessToken')
             })
             .catch(error => {
                 console.error('Error fetching access token:', error);
@@ -67,6 +67,7 @@ const UserMenu = () => {
 
     const handleLogout = () => {
         setAccessToken('');
+        sessionStorage.setItem('accessToken', '');
         setCurrentUser(null);
         toggleOpen();
     };
