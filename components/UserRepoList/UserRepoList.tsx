@@ -33,7 +33,7 @@ export function UserRepoList({
         loadingRef.current = true;
     
         try {
-            const newRepos = await fetchUserRepos(username, pageNumber.current);
+            const newRepos = await fetchUserRepos(username, pageNumber.current, 10);
             if (newRepos) {
                 setRepos((prevRepos) => [...prevRepos, ...newRepos]);
                 if (newRepos.length < 10) {

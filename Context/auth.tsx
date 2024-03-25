@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     
     const handleGitHubLogin = () => {
         const clientId = '1d6c5925798aa7391380';
-        const redirectUri = 'http://localhost:3000/';
+        const redirectUri = 'https://dcard-demo.vercel.app/';
         const scope = 'repo';
         const authUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
 
