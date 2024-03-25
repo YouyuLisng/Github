@@ -1,8 +1,13 @@
-async function fetchUserRepos() {
+import fetchFirstRepo from "./fetchFirstRepo";
+
+async function fetchIssues( username: string, issue_number: number) {
+    const repo = await fetchFirstRepo(username, 1, 1);
+    console.log(username)
     try {
         const headers = new Headers();
         headers.append('Accept', 'application/vnd.github.v3+json');
-        const response = await fetch(`https://api.github.com/repos/YouyuLisng/Dcard/issues`, {
+        headers.append('Authorization', 'Bearer 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');
+        const response = await fetch(`https://api.github.com/repos/${username}/${repo.name}/issues/${issue_number}`, {
             headers: headers,
             cache: 'force-cache'
         });
@@ -12,7 +17,6 @@ async function fetchUserRepos() {
         }
 
         const data = await response.json();
-
         return data; // Return the response data
     } catch (error) {
         console.error('Error fetching user repositories:', error);
@@ -20,4 +24,4 @@ async function fetchUserRepos() {
     }
 }
 
-export default fetchUserRepos;
+export default fetchIssues;

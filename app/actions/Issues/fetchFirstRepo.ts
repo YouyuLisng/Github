@@ -14,7 +14,7 @@ async function fetchUserRepos(username: string, pageNumber: number, per_page: nu
 
         const data = await response.json();
 
-        return data; // Return the response data
+        return data[0]; // Return the response data
     } catch (error) {
         console.error('Error fetching user repositories:', error);
         return null;

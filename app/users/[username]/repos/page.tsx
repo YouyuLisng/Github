@@ -7,6 +7,7 @@ import { IoIosLink } from "react-icons/io";
 import Link from 'next/link';
 import { Separator } from "@/components/ui/separator"
 import type { Metadata } from "next";
+import EmptyState from '@/components/EmptyState';
 interface ReposPageProps {
     params: {
         username: string;
@@ -21,7 +22,11 @@ export async function generateMetadata( { params: { username } }: ReposPageProps
 
 export default async function ReposPage({ params: { username } } : ReposPageProps) {
     const user = await fetchUser(username);
-    const repo = await fetchUserRepos(username, 1);
+    const repo = await fetchUserRepos(username, 1, 10);
+
+    if (!repo) {
+        <EmptyState />
+    }
     return (
         <>
             <div className='max-w-[760px] mx-auto bg-white'>

@@ -1,7 +1,7 @@
 // AuthContext.tsx
 "use client"
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import getCurrentUser from '@/app/actions/fetchCurrentUser';
+import getCurrentUser from '@/app/actions/CurrentUser/fetchCurrentUser';
 import { GitHubUser } from '@/type/type';
 interface AuthContextProps {
     children: React.ReactNode;

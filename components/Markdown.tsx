@@ -6,10 +6,9 @@ import remarkGitHub from 'remark-github';
 interface MarkdownViewerProps {
     content: string;
     maxHeight?: string;
-    repository: string;
 }
 
-const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, maxHeight, repository }) => {
+const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, maxHeight }) => {
     if (!content) {
         return <p>沒有資料</p>;
     }
@@ -17,7 +16,7 @@ const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, maxHeight, rep
     const decodedContent = atob(content);
     return (
         <div className="markdown-container overflow-auto mt-4 mb-4" style={{ maxHeight }}>
-            <Markdown className="prose" remarkPlugins={[remarkGfm, [remarkGitHub, { repository: repository }]]}>{decodedContent}</Markdown>
+            <Markdown className="prose">{decodedContent}</Markdown>
         </div>
     );
 };

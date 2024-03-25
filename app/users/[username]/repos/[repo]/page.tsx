@@ -1,6 +1,6 @@
 import React from 'react';
 import fetchRepo from '@/app/actions/fetchRepo';
-import fetchMarkdown from '@/app/actions/fetchMarkdown';
+import fetchMarkdown from '@/app/actions/Markdown/fetchMarkdown';
 import Avatar from '@/components/Avatar';
 import { IoCloseOutline } from "react-icons/io5";
 import Link from 'next/link';
@@ -51,7 +51,6 @@ export default async function RepoPage({ params: { username, repo } } : RepoPage
         );
     }
 
-    // 如果 MarkdownData 存在並且有內容，則渲染 MarkdownViewer
     return (
         <div className='max-w-[1320px] mx-auto md:px-2 px-2 bg-white rounded-lg'>
             <div className='p-6'>
@@ -70,7 +69,7 @@ export default async function RepoPage({ params: { username, repo } } : RepoPage
                     <h1 className='text-3xl mb-4'>{RepoData.name}</h1>
                     <Time time={RepoData.created_at} />
                     <div className='mt-4'>
-                        <MarkdownViewer content={MarkdownData.content} repository={`https://github.com/${username}/${repo}`} />
+                        <MarkdownViewer content={MarkdownData.content} />
                     </div>
                 </div>
             </div>
