@@ -30,7 +30,7 @@ export default function Search() {
         }
     });
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        route.push(`/post/${values.text}/`);
+        route.push(`/user/${values.text}/`);
     };
 
     return (
@@ -45,8 +45,8 @@ export default function Search() {
                             <FormItem>
                                 <FormControl>
                                 <Input
-                                    className='md:w-[450px] h-[30px] rounded-none focus-visible:ring-0 focus-visible:ring-offset-0'
-                                    placeholder="搜尋關鍵字"
+                                    className='w-[350px] md:w-[550px] h-[48px] rounded-e-none focus-visible:ring-0 focus-visible:ring-offset-0'
+                                    placeholder="Search a GitHub UserName"
                                     {...field}
                                 />
                                 </FormControl>
@@ -54,8 +54,8 @@ export default function Search() {
                             </FormItem>
                             )}
                         />
-                        <button className='bg-btnblue'>
-                            <IoSearchOutline className="w-4 h-4 m-2 text-white" />
+                        <button className='bg-btnblue rounded-e-md'>
+                            <IoSearchOutline className="w-8 h-8 m-2 text-white rounded-e-md" />
                         </button>
                     </div>
                 </form>

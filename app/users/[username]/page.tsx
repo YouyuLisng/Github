@@ -9,6 +9,6 @@ export const metadata: Metadata = {
 
 export default function page() {
   return (
-    <EmptyState />
+    <EmptyState title='Oops！' subtitle='Not Found' showReaet={true} />
   )
 }

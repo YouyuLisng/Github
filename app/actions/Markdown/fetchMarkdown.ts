@@ -3,7 +3,7 @@ async function fetchMarkdown(username: string, repo: string) {
         const headers = new Headers();
         headers.append('Accept', 'application/vnd.github.v3+json');
 
-        const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/README.md`, {
+        const response = await fetch(`https://api.github.com/repos/${username}/${repo}/readme`, {
             headers: headers
         });
 

@@ -9,9 +9,9 @@ interface EmptyStateProps {
 }
 
 const EmptyState: React.FC<EmptyStateProps> = ({
-    title = 'Oops！',
-    subtitle = 'Not Found',
-    showReaet = true
+    title,
+    subtitle,
+    showReaet,
 }) => {
     const router = useRouter();
     return (

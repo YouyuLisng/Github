@@ -21,7 +21,7 @@ export default function Time({ time }: TimeProps) {
 
     return (
         <>
-            {isClient ? <p className='text-sm text-zinc-500' suppressHydrationWarning={true}>{formatDate(time)}</p> : null }
+            {isClient ? <p className='text-xs text-zinc-500' suppressHydrationWarning={true}>{formatDate(time)}</p> : null }
         </>
     )
 }

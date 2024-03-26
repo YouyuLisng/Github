@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+import { FaEdit } from "react-icons/fa";
 import {
     Dialog,
     DialogContent,
@@ -10,10 +10,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import IssuesForm from './Form/IssuesForm';
-import { useAuthContext } from '@/Context/auth'
+import IssuesForm from '@/components/Form/IssuesForm';
 
-export default function EditBtn() {
+import { useAuthContext } from '@/Context/auth'
+export function IssuesFormModal() {
     const { currentUser, accessToken } = useAuthContext();
     const [isOpen, setIsOpen] = useState(false);
     const handleToggle = () => {
@@ -22,16 +22,17 @@ export default function EditBtn() {
     if(!currentUser) {
         return null
     }
-
     return (
         <>
             <Dialog onOpenChange={handleToggle} open={isOpen}>
-                <div onClick={handleToggle} className='p-2'>
-                    <HiOutlineDotsHorizontal className='me-2' size={20} />
+                <div className="fixed bottom-10 right-10 bg-sky-500 rounded-md cursor-pointer z-50">
+                    <div onClick={handleToggle} className='p-2'>
+                        <FaEdit className='text-white' size={20} />
+                    </div>
                 </div>
                 <DialogContent className="sm:max-w-[300px] md:max-w-[800px] lg:max-w-[1000px]">
                     <DialogHeader>
-                        <DialogTitle>Add Issues</DialogTitle>
+                        <DialogTitle>發佈文章</DialogTitle>
                     </DialogHeader>
                     <IssuesForm currentUser={currentUser} accessToken={accessToken} handleCloseDialog={handleToggle} />
                 </DialogContent>

@@ -1,6 +1,6 @@
 "use client"
-import React, { useState } from 'react'
-
+import React from 'react'
+import { useRouter } from 'next/navigation';
 import { GitHubUser } from '@/type/type';
 import { useForm } from "react-hook-form"
 import {
@@ -17,18 +17,25 @@ import Texteditor from "@/components/Texteditor";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 import toast from "react-hot-toast";
+import { GitHubIssue } from '@/type/type'
+import editIssues from '@/app/actions/Issues/editIssues'
 
-interface IssuesFormProps {
+interface EditIssuesFormProps {
+    reponame: string;
+    issues: GitHubIssue;
     currentUser: GitHubUser,
     accessToken: string;
     handleCloseDialog: () => void;
 }
 
-export default function IssuesForm({
+export default function EditIssuesForm({
+    reponame,
+    issues,
     currentUser,
     accessToken,
     handleCloseDialog
-}: IssuesFormProps) {
+}: EditIssuesFormProps) {
+    const router = useRouter();
     const formSchema = z.object({
         title: z.string().min(1, { message: "title必須填寫" }),
         body: z.string().min(30, { message: "內容至少需要30字" }),
@@ -37,15 +44,15 @@ export default function IssuesForm({
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: '',
-            body: '',
+            title: issues.title,
+            body: issues.body,
         }
     });
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const response = await fetch(`https://api.github.com/repos/${currentUser.login}/${values.title}/issues`, {
-                method: 'POST',
+            const response = await fetch(`https://api.github.com/repos/${currentUser.login}/${reponame}/issues/${issues.number}`, {
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
@@ -59,6 +66,7 @@ export default function IssuesForm({
             }
             toast.success('成功');
             handleCloseDialog();
+            router.push(`/user/${currentUser.login}`)
         } catch (error) {
             console.error("未知錯誤:", error);
         }

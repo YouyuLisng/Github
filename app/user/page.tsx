@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 };
 export default async function PostPage() {
     return (
-        <EmptyState />
+        <EmptyState title='Oops！' subtitle='Not Found' showReaet={true} />
     )
 }

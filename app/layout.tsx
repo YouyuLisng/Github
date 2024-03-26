@@ -4,8 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Container from "@/components/Container";
 import { AuthProvider } from '@/Context/auth';
-import EditBtn from "@/components/EditBtn";
 import ToasterProvider from '@/components/providers/ToastProvider';
+import { IssuesFormModal } from "@/components/Modal/IssuesFormModal";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -25,7 +25,7 @@ export default function RootLayout({
                     <div className="pb-20 pt-16 relative">
                         <Container>
                             {children}
-                            <EditBtn />
+                            <IssuesFormModal />
                         </Container>
                     </div>
                 </AuthProvider>

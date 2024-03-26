@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Loader from '@/components/Loader';
 import { SkeletonItem } from '@/components/Skeleton';
-import fetchRepos from '@/app/actions/fetchRepos';
+import fetchRepos from '@/app/actions/Repo/fetchRepos';
 import { Repository } from '@/type/type';
 import RepoItem from './RepoItem';
 
@@ -59,7 +59,7 @@ export function RepoList({
 
     return (
         <>
-            <div className="grid grid-cols-1 gap-3 p-4 bg-white md:rounded-e-xl">
+            <div className="grid grid-cols-1 gap-3 p-4 bg-white rounded-xl">
                 {repos.length > 0 ? (
                     repos.map((repo: Repository, index: number) => (
                         <div key={index}>
@@ -72,6 +72,7 @@ export function RepoList({
                     ))
                 )}
                 {loading && <Loader />}
+                {!hasMoreRef.current && <p className="text-center text-gray-500">沒有更多資料了</p>}
             </div>
         </>
     );

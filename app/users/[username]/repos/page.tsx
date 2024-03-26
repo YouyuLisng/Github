@@ -1,6 +1,6 @@
 import React from 'react'
-import fetchUserRepos from '@/app/actions/fetchUserRepos'
-import fetchUser from '@/app/actions/fetchUser'
+import fetchUserRepos from '@/app/actions/UserRepo/fetchUserRepos'
+import fetchUser from '@/app/actions/UserRepo/fetchUser'
 import UserAvatar from '@/components/UserAvatar';
 import { UserRepoList } from '@/components/UserRepoList/UserRepoList';
 import { IoIosLink } from "react-icons/io";

@@ -1,5 +1,5 @@
 import React from 'react';
-import fetchRepo from '@/app/actions/fetchRepo';
+import fetchRepo from '@/app/actions/Repo/fetchRepo';
 import fetchMarkdown from '@/app/actions/Markdown/fetchMarkdown';
 import Avatar from '@/components/Avatar';
 import { IoCloseOutline } from "react-icons/io5";

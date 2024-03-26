@@ -1,4 +1,4 @@
-import fetchRepos from '@/app/actions/fetchRepos';
+import fetchRepos from '@/app/actions/Repo/fetchRepos';
 import Category from "./Category"
 import { FaNodeJs, FaReact, FaVuejs, FaAngular } from "react-icons/fa";
 import { TbBrandNextjs } from "react-icons/tb";

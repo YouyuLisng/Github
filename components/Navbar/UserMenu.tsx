@@ -21,7 +21,7 @@ const UserMenu = () => {
         if (code) {
             const clientId = '1d6c5925798aa7391380';
             const clientSecret = '9e733dd6bc55c1034ecf7b76796134f98e4e08ff';
-            const redirect_uri = 'https://dcard-demo.vercel.app/';
+            const redirect_uri = 'http://localhost:3000/';
             const data = {
                 client_id: clientId,
                 client_secret: clientSecret,
@@ -70,7 +70,7 @@ const UserMenu = () => {
                             <>  
                                 <MenuItem onClick={() => router.push(`/users/${currentUser.login}/repos`)} label={currentUser.login} />
                                 <MenuItem onClick={() => router.push('/profile')} label='個人資料' />
-                                <MenuItem onClick={() => router.push('/post')} label='我的文章' />
+                                <MenuItem onClick={() => router.push(`/post/${currentUser.login}`)} label='我的文章' />
                                 <hr />
                                 <MenuItem label='登出' onClick={handleLogout} />
                             </>

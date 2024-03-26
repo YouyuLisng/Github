@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Loader from '@/components/Loader';
 import { SkeletonItem } from '@/components/Skeleton';
-import fetchUserRepos from '@/app/actions/fetchUserRepos';
+import fetchUserRepos from '@/app/actions/UserRepo/fetchUserRepos';
 import { Repository } from '@/type/type';
 import UserRepoItem from '@/components/UserRepoList/UserRepoItem';
 

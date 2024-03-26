@@ -1,29 +1,28 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
 import Loader from '@/components/Loader';
-import { SkeletonItem } from '@/components/Skeleton';
-import fetchUserPost from '@/app/actions/Issues/fetchAllIssues';
+import fetchAllIssues from '@/app/actions/Issues/fetchAllIssues';
 import { GitHubIssue } from '@/type/type';
 import PostItem from './PostItem';
 import EmptyState from '../EmptyState';
+import { SkeletonItem } from '@/components/Skeleton';
 
 interface PostListProps {
-    data: GitHubIssue[];
     username: string
 }
 
 export function PostList({
-    data,
     username
 }: PostListProps) {
     console.log('PostList 重新渲染了');
-    const [posts, setPosts] = useState<GitHubIssue[]>(data);
+    const [posts, setPosts] = useState<GitHubIssue[]>([]);
     const [loading, setLoading] = useState(false);
     const loadingRef = useRef(false);
-    const pageNumber = useRef(2);
+    const pageNumber = useRef(1);
     const hasMoreRef = useRef(true);
 
     useEffect(() => {
+        loadPosts();
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -35,7 +34,7 @@ export function PostList({
         loadingRef.current = true;
         const scrollPosition = window.scrollY;
         try {
-            const newPosts = await fetchUserPost(username, pageNumber.current); // 修改此處的函式名稱為 fetchPosts
+            const newPosts = await fetchAllIssues(username, pageNumber.current); // 修改此處的函式名稱為 fetchPosts
             if (newPosts) {
                 setPosts((prevPosts) => [...prevPosts, ...newPosts]);
                 if (newPosts.length < 10) {
@@ -70,9 +69,12 @@ export function PostList({
                         </div>
                     ))
                 ) : (
-                    <EmptyState />
+                    Array.from({ length: 10 }).map((_, index) => (
+                        <SkeletonItem key={index} />
+                    ))
                 )}
-                {loading && <Loader />}
+                {loading && <SkeletonItem />}
+                {!hasMoreRef.current && <p className="text-center text-gray-500">沒有更多文章了</p>}
             </div>
         </>
     );

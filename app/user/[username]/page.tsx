@@ -1,6 +1,5 @@
 import React from 'react'
-import fetchAllIssues from '@/app/actions/Issues/fetchAllIssues'
-import fetchUser from '@/app/actions/fetchUser'
+import fetchUser from '@/app/actions/UserRepo/fetchUser'
 import UserAvatar from '@/components/UserAvatar';
 import { PostList } from '@/components/PostList/PostList';
 import { IoIosLink } from "react-icons/io";
@@ -21,7 +20,6 @@ export async function generateMetadata( { params: { username } }: ReposPageProps
 
 export default async function ReposPage({ params: { username } } : ReposPageProps) {
     const user = await fetchUser(username);
-    const posts = await fetchAllIssues(username, 1);
     return (
         <>
             <div className='max-w-[760px] mx-auto bg-white'>
@@ -48,7 +46,7 @@ export default async function ReposPage({ params: { username } } : ReposPageProp
                         )}
                         <Separator className='my-4' />
                     </div>
-                    <PostList username={username} data={posts} />
+                    <PostList username={username} />
                 </div>
             </div>
         </>

@@ -1,13 +1,15 @@
 import fetchFirstRepo from "./fetchFirstRepo";
 
-async function fetchAllIssues( username: string, pageNumber: number) {
+async function editIssues(username: string, issuesNumber: number, updatedData: any) {
     const repo = await fetchFirstRepo(username, 1, 1);
     try {
         const headers = new Headers();
         headers.append('Accept', 'application/vnd.github.v3+json');
-        const response = await fetch(`https://api.github.com/repos/${username}/${repo.name}/issues?sort=created&page=${pageNumber}&per_page=10`, {
+        const response = await fetch(`https://api.github.com/repos/${username}/${repo.name}/issues/${issuesNumber}`, {
+            method: "PATCH",
             headers: headers,
-            cache: 'no-store'
+            cache: 'no-store',
+            body: JSON.stringify(updatedData) // 將更新的資料作為 body 傳遞
         });
 
         if (!response.ok) {
@@ -23,4 +25,4 @@ async function fetchAllIssues( username: string, pageNumber: number) {
     }
 }
 
-export default fetchAllIssues;
+export default editIssues;
