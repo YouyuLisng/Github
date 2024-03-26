@@ -9,7 +9,6 @@ const UserMenu = () => {
     const router = useRouter();
     
     const { accessToken, setAccessToken, currentUser, setCurrentUser, handleGitHubLogin } = useAuthContext();
-    // const [currentUser, setCurrentUser] = useState<GitHubUser | null>(null);
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = useCallback(() => {
@@ -21,11 +20,9 @@ const UserMenu = () => {
         if (code) {
             const clientId = '1d6c5925798aa7391380';
             const clientSecret = '9e733dd6bc55c1034ecf7b76796134f98e4e08ff';
-            const redirect_uri = 'http://localhost:3000/';
             const data = {
                 client_id: clientId,
                 client_secret: clientSecret,
-                redirect_uri: redirect_uri,
                 code: code,
             };
 
@@ -39,6 +36,7 @@ const UserMenu = () => {
             })
             .then(response => response.json())
             .then(data => {
+                localStorage.setItem('access_token', data.access_token);
                 setAccessToken(data.access_token);
             })
             .catch(error => {

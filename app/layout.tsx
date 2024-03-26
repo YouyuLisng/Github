@@ -1,4 +1,4 @@
-
+"use client"
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
@@ -25,7 +25,6 @@ export default function RootLayout({
                     <div className="pb-20 pt-16 relative">
                         <Container>
                             {children}
-                            <IssuesFormModal />
                         </Container>
                     </div>
                 </AuthProvider>

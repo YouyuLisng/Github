@@ -1,9 +1,9 @@
-async function fetchFirstRepo(username: string, pageNumber: number, per_page: number) {
+async function fetchFirstRepo(username: string) {
     try {
         const headers = new Headers();
         headers.append('Accept', 'application/vnd.github.v3+json');
-        headers.append('Authorization', 'Bearer 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');
-        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=created&page=${pageNumber}&per_page=${per_page}`, {
+        headers.append('Authorization', 'Bearer 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');
+        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=created&page=1&per_page=1`, {
             headers: headers,
             cache: 'no-store'
         });

@@ -8,18 +8,17 @@ import { GitHubIssue } from '@/type/type';
 import ReactHtmlParser from 'react-html-parser';
 import fetchIssues from '@/app/actions/Issues/fetchIssues';
 import Loader from '../Loader'; // 引入 Loader 元件
+import { EditIssuesFormModal } from '../Modal/EditIssuesFormModal';
 
-interface PostIssuesProps {
+interface IssuesProps {
     username: string;
     issue_number: number;
-    children: React.ReactNode;
 }
 
-export default function PostIssues({
+export default function Issues({
     username,
     issue_number,
-    children
-}: PostIssuesProps) {
+}: IssuesProps) {
     const [issue, setIssue] = useState<GitHubIssue | null>(null);
     const [loading, setLoading] = useState<boolean>(true); // 新增 loading 狀態變數
 
@@ -50,8 +49,8 @@ export default function PostIssues({
                                 <p className="px-2 text-sm">{username}</p>
                             </div>
                             <div className='flex items-center'>
-                                {children}
-                                <Link href={`/post/${username}`}>
+                                <EditIssuesFormModal issues={issue}  />
+                                <Link href={`/users/${username}`}>
                                     <IoCloseOutline size={20} />
                                 </Link>
                             </div>
@@ -60,7 +59,7 @@ export default function PostIssues({
                             <h1 className='text-3xl mb-4'>{issue.title}</h1>
                             <Time time={issue.created_at} />
                             <div className='mt-4 text-xs md:text-sm text-zinc-500'>
-                                {ReactHtmlParser(issue.body)}
+                                {ReactHtmlParser(issue.body.replace(/<a/g, '<span').replace(/<\/a>/g, '</span>'))}
                             </div>
                         </div>
                     </>

@@ -1,10 +1,11 @@
 import fetchFirstRepo from "./fetchFirstRepo";
 
 async function fetchAllIssues( username: string, pageNumber: number) {
-    const repo = await fetchFirstRepo(username, 1, 1);
+    const repo = await fetchFirstRepo(username);
     try {
         const headers = new Headers();
         headers.append('Accept', 'application/vnd.github.v3+json');
+        headers.append('Authorization', 'Bearer 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');
         const response = await fetch(`https://api.github.com/repos/${username}/${repo.name}/issues?sort=created&page=${pageNumber}&per_page=10`, {
             headers: headers,
             cache: 'no-store'

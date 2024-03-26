@@ -2,41 +2,41 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Loader from '@/components/Loader';
 import { SkeletonItem } from '@/components/Skeleton';
-import fetchUserRepos from '@/app/actions/UserRepo/fetchUserRepos';
-import { Repository } from '@/type/type';
-import UserRepoItem from '@/components/UserRepoList/UserRepoItem';
+import fetchAllIssues from '@/app/actions/Issues/fetchAllIssues';
+import { GitHubIssue } from '@/type/type';
+import IssuesItem from '@/components/IssuesList/IssuesItem';
+import { IssuesFormModal } from '../Modal/IssuesFormModal';
 
-interface  UserRepoListProps {
+interface IssuesListProps {
     username: string;
-    repo: Repository[];
 }
 
-export function UserRepoList({
+export function IssuesList({
     username,
-    repo,
-}: UserRepoListProps) {
-    const [repos, setRepos] = useState<Repository[]>(repo);
+}: IssuesListProps) {
+    const [issues, setIssues] = useState<GitHubIssue[]>([]);
     const [loading, setLoading] = useState(false);
     const loadingRef = useRef(false);
-    const pageNumber = useRef(2);
+    const pageNumber = useRef(1);
     const hasMoreRef = useRef(true);
 
     useEffect(() => {
+        loadIssues();
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const loadRepos = async () => {
+    const loadIssues = async () => {
         if (loadingRef.current || !hasMoreRef.current) return;
-    
+
         setLoading(true);
         loadingRef.current = true;
-    
+
         try {
-            const newRepos = await fetchUserRepos(username, pageNumber.current, 10);
-            if (newRepos) {
-                setRepos((prevRepos) => [...prevRepos, ...newRepos]);
-                if (newRepos.length < 10) {
+            const newIssues = await fetchAllIssues(username, pageNumber.current);
+            if (newIssues) {
+                setIssues((prevIssues) => [...prevIssues, ...newIssues]);
+                if (newIssues.length < 10) {
                     hasMoreRef.current = false;
                 }
             }
@@ -48,19 +48,19 @@ export function UserRepoList({
             setLoading(false);
         }
     };
-    
+
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMoreRef.current) return;
-        loadRepos();
+        loadIssues();
     };
 
     return (
         <>
             <div className="grid grid-cols-1 gap-3 p-2 md:p-4 bg-white md:rounded-e-xl">
-                {repos.length > 0 ? (
-                    repos.map((repo: Repository, index: number) => (
+                {issues.length > 0 ? (
+                    issues.map((issue: GitHubIssue, index: number) => (
                         <div key={index}>
-                            <UserRepoItem repo={repo} />
+                            <IssuesItem repo={issue} />
                         </div>
                     ))
                 ) : (
@@ -71,6 +71,7 @@ export function UserRepoList({
                 {loading && <Loader />}
                 {!hasMoreRef.current && <p className="text-center text-gray-500">沒有更多資料了</p>}
             </div>
+            <IssuesFormModal />
         </>
     );
 }

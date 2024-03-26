@@ -1,6 +1,6 @@
 "use client"
-import React, { useState } from 'react'
-
+import React from 'react'
+import { useRouter } from 'next/navigation';
 import { GitHubUser } from '@/type/type';
 import { useForm } from "react-hook-form"
 import {
@@ -17,18 +17,19 @@ import Texteditor from "@/components/Texteditor";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 import toast from "react-hot-toast";
+import addssues from '@/app/actions/Issues/addssues'
 
 interface IssuesFormProps {
     currentUser: GitHubUser,
-    accessToken: string;
     handleCloseDialog: () => void;
 }
 
 export default function IssuesForm({
     currentUser,
-    accessToken,
     handleCloseDialog
 }: IssuesFormProps) {
+    const router = useRouter();
+    const accessToken = localStorage.getItem('access_token') || '';
     const formSchema = z.object({
         title: z.string().min(1, { message: "title必須填寫" }),
         body: z.string().min(30, { message: "內容至少需要30字" }),
@@ -44,21 +45,15 @@ export default function IssuesForm({
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const response = await fetch(`https://api.github.com/repos/${currentUser.login}/${values.title}/issues`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
-                },
-                body: JSON.stringify(values)
-            });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+            const response = await addssues(currentUser.login, values, accessToken);
+            
+            if (response) {
+                toast.success('成功');
+                handleCloseDialog();
+                window.location.reload();
+            } else {
+                throw new Error('Failed to update issue');
             }
-            toast.success('成功');
-            handleCloseDialog();
         } catch (error) {
             console.error("未知錯誤:", error);
         }

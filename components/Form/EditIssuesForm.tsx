@@ -21,7 +21,6 @@ import { GitHubIssue } from '@/type/type'
 import editIssues from '@/app/actions/Issues/editIssues'
 
 interface EditIssuesFormProps {
-    reponame: string;
     issues: GitHubIssue;
     currentUser: GitHubUser,
     accessToken: string;
@@ -29,7 +28,6 @@ interface EditIssuesFormProps {
 }
 
 export default function EditIssuesForm({
-    reponame,
     issues,
     currentUser,
     accessToken,
@@ -58,6 +56,7 @@ export default function EditIssuesForm({
                 // 如果請求成功，執行成功提示和路由跳轉
                 toast.success('成功');
                 handleCloseDialog();
+                router.push(`/users/${currentUser.login}`)
             } else {
                 throw new Error('Failed to update issue');
             }

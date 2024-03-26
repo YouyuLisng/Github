@@ -1,22 +1,30 @@
-// AuthContext.tsx
 "use client"
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import getCurrentUser from '@/app/actions/CurrentUser/fetchCurrentUser';
 import { GitHubUser } from '@/type/type';
+
 interface AuthContextProps {
     children: React.ReactNode;
 }
 
 interface AuthContext {
     accessToken: string;
-    setAccessToken: React.Dispatch<React.SetStateAction<string>>;
+    setAccessToken: (token: string) => void;
     currentUser: GitHubUser | null;
     setCurrentUser: React.Dispatch<React.SetStateAction<GitHubUser | null>>;
     handleGitHubLogin: () => void;
 }
+
 const AuthContext = createContext<AuthContext | null>(null);
+
 export const AuthProvider = ({ children }: AuthContextProps) => {
-    const [accessToken, setAccessToken] = useState<string>('');
+    const [accessToken, setAccessTokenState] = useState<string>(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('access_token') || '';
+        } else {
+            return '';
+        }
+    });
     const [currentUser, setCurrentUser] = useState<GitHubUser | null>(null);
     
     const handleGitHubLogin = () => {
@@ -43,8 +51,15 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         fetchCurrentUser();
     }, [accessToken]);
     
+    const setAccessToken = (token: string) => {
+        setAccessTokenState(token);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('access_token', token);
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ accessToken, setAccessToken, currentUser, setCurrentUser, handleGitHubLogin}}>
+        <AuthContext.Provider value={{ accessToken, setAccessToken, currentUser, setCurrentUser, handleGitHubLogin }}>
             {children}
         </AuthContext.Provider>
     );
@@ -57,5 +72,3 @@ export const useAuthContext = () => {
     }
     return context;
 };
-
-export default AuthProvider;
