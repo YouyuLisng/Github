@@ -1,10 +1,12 @@
 import fetchFirstRepo from "./fetchFirstRepo";
 
-async function editIssues(username: string, issuesNumber: number, updatedData: any) {
+async function editIssues(username: string, issuesNumber: number, updatedData: any, accessToken: string) {
     const repo = await fetchFirstRepo(username, 1, 1);
     try {
         const headers = new Headers();
         headers.append('Accept', 'application/vnd.github.v3+json');
+        headers.append('Authorization', `Bearer ${accessToken}`); // 加入 Authorization 標頭
+
         const response = await fetch(`https://api.github.com/repos/${username}/${repo.name}/issues/${issuesNumber}`, {
             method: "PATCH",
             headers: headers,

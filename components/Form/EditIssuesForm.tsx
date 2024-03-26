@@ -51,23 +51,18 @@ export default function EditIssuesForm({
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const response = await fetch(`https://api.github.com/repos/${currentUser.login}/${reponame}/issues/${issues.number}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
-                },
-                body: JSON.stringify(values)
-            });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+            // 調用 editIssues 函數進行 PATCH 請求
+            const response = await editIssues(currentUser.login, issues.number, values, accessToken);
+            
+            if (response) {
+                // 如果請求成功，執行成功提示和路由跳轉
+                toast.success('成功');
+                handleCloseDialog();
+            } else {
+                throw new Error('Failed to update issue');
             }
-            toast.success('成功');
-            handleCloseDialog();
-            router.push(`/user/${currentUser.login}`)
         } catch (error) {
+            // 處理錯誤
             console.error("未知錯誤:", error);
         }
     };
