@@ -21,15 +21,15 @@ import addssues from '@/app/actions/Issues/addssues'
 
 interface IssuesFormProps {
     currentUser: GitHubUser,
+    accessToken: string;
     handleCloseDialog: () => void;
 }
 
 export default function IssuesForm({
     currentUser,
+    accessToken,
     handleCloseDialog
 }: IssuesFormProps) {
-    const router = useRouter();
-    const accessToken = localStorage.getItem('access_token') || '';
     const formSchema = z.object({
         title: z.string().min(1, { message: "title必須填寫" }),
         body: z.string().min(30, { message: "內容至少需要30字" }),
@@ -71,10 +71,10 @@ export default function IssuesForm({
                             <FormItem>
                                 <FormLabel className="uppercase text-sx font-bold text-zinc-500">Title</FormLabel>
                                 <FormControl>
-                                <Input
-                                    placeholder="請輸入Title"
-                                    {...field}
-                                />
+                                    <Input
+                                        placeholder="請輸入Title"
+                                        {...field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

@@ -8,7 +8,7 @@ import { useAuthContext } from '@/Context/auth'
 const UserMenu = () => {
     const router = useRouter();
     
-    const { accessToken, setAccessToken, currentUser, setCurrentUser, handleGitHubLogin } = useAuthContext();
+    const { setAccessToken, currentUser, setCurrentUser, handleGitHubLogin } = useAuthContext();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = useCallback(() => {
@@ -66,11 +66,10 @@ const UserMenu = () => {
                     <div className='flex flex-col cursor-pointer'>
                         {currentUser ? (
                             <>  
-                                <MenuItem onClick={() => router.push(`/users/${currentUser.login}/repos`)} label={currentUser.login} />
-                                <MenuItem onClick={() => router.push('/profile')} label='個人資料' />
-                                <MenuItem onClick={() => router.push(`/post/${currentUser.login}`)} label='我的文章' />
+                                <MenuItem label={currentUser.login} />
+                                <MenuItem onClick={() => { router.push(`/users/${currentUser.login}`); toggleOpen(); }} label='我的文章' />
                                 <hr />
-                                <MenuItem label='登出' onClick={handleLogout} />
+                                <MenuItem label='登出' onClick={() => {handleLogout(); }} />
                             </>
                         ) : (
                             <>
@@ -82,7 +81,7 @@ const UserMenu = () => {
                                 <MenuItem label='商業合作'/>
                                 <MenuItem label='免費下載 App'/>
                                 <MenuItem label='設定'/>
-                                <MenuItem onClick={handleGitHubLogin} label='登入'/>
+                                <MenuItem onClick={() => { handleGitHubLogin(); toggleOpen(); }} label='登入' />
                             </>
                         )}
                     </div>

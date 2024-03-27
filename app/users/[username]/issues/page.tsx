@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     description: "Not found",
 };
 
-export default function UsersPage() {
+export default function Page() {
     return (
         <EmptyState title='Oops！' subtitle='Not Found' showReaet={true} />
     )

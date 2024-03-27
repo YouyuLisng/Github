@@ -1,12 +1,11 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Loader from '@/components/Loader';
-import { SkeletonItem } from '@/components/Skeleton';
+import { IssuesItemSkeleton } from '@/components/Skeleton/IssuesItemSkeleton';
 import fetchAllIssues from '@/app/actions/Issues/fetchAllIssues';
 import { GitHubIssue } from '@/type/type';
 import IssuesItem from '@/components/IssuesList/IssuesItem';
 import { IssuesFormModal } from '../Modal/IssuesFormModal';
-
 interface IssuesListProps {
     username: string;
 }
@@ -65,11 +64,11 @@ export function IssuesList({
                     ))
                 ) : (
                     Array.from({ length: 10 }).map((_, index) => (
-                        <SkeletonItem key={index} />
+                        <IssuesItemSkeleton key={index} />
                     ))
                 )}
                 {loading && <Loader />}
-                {!hasMoreRef.current && <p className="text-center text-gray-500">沒有更多資料了</p>}
+                {!hasMoreRef.current && <p className="text-center text-gray-500">沒有更多文章了</p>}
             </div>
             <IssuesFormModal />
         </>

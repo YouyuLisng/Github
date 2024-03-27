@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton"
 
-export function SkeletonItem() {
+export function IssuesItemSkeleton() {
     return (
         <div className="border-b">
             <div className="py-2 px-3">

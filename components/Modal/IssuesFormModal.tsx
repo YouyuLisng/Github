@@ -14,7 +14,7 @@ import IssuesForm from '@/components/Form/IssuesForm';
 
 import { useAuthContext } from '@/Context/auth'
 export function IssuesFormModal() {
-    const { currentUser } = useAuthContext();
+    const { currentUser, accessToken } = useAuthContext();
     const [isOpen, setIsOpen] = useState(false);
     const handleToggle = () => {
         setIsOpen(!isOpen);
@@ -35,7 +35,7 @@ export function IssuesFormModal() {
                     <DialogHeader>
                         <DialogTitle>發佈文章</DialogTitle>
                     </DialogHeader>
-                    <IssuesForm currentUser={currentUser} handleCloseDialog={handleToggle} />
+                    <IssuesForm currentUser={currentUser} accessToken={accessToken} handleCloseDialog={handleToggle} />
                 </DialogContent>
             </Dialog>
         </>
