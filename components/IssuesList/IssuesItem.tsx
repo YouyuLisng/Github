@@ -25,8 +25,8 @@ function IssuesItem({
                     </div>
                     <div className="py-3">
                         <p className="text-md md:text-xl mb-2">{repo.title}</p>
-                        <div className="text-xs md:text-sm text-zinc-500 truncate pointer-events-none">
-                            {ReactHtmlParser(repo.body.replace(/<a/g, '<span').replace(/<\/a>/g, '</span>'))}
+                        <div className="text-xs md:text-sm text-zinc-500 truncate pointer-events-none" dangerouslySetInnerHTML={{ __html: repo.body }}>
+                            {/* {ReactHtmlParser(repo.body.replace(/<a/g, '<span').replace(/<\/a>/g, '</span>'))} */}
                         </div>
                     </div>
                 </div>

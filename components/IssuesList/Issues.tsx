@@ -91,8 +91,8 @@ export default function Issues({
                         <div>
                             <h1 className='text-md md:text-3xl mb-4'>{issue.title}</h1>
                             <Time time={issue.created_at} />
-                            <div className='mt-4 text-xs md:text-sm text-zinc-500'>
-                                {ReactHtmlParser(issue.body.replace(/<a/g, '<span').replace(/<\/a>/g, '</span>'))}
+                            <div className='mt-4 text-xs md:text-sm text-zinc-500' dangerouslySetInnerHTML={{ __html: issue.body }}>
+                                {/* {ReactHtmlParser(issue.body.replace(/<a/g, '<span').replace(/<\/a>/g, '</span>'))} */}
                             </div>
                         </div>
                     </>
