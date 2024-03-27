@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { Separator } from "@/components/ui/separator"
 import type { Metadata } from "next";
 import EmptyState from '@/components/EmptyState';
+import Image from "next/image";
 interface UsersProps {
     params: {
         username: string;
@@ -33,7 +34,7 @@ export default async function Users({ params: { username } } : UsersProps) {
         return (
             <div className='max-w-[760px] mx-auto bg-white'>
                 <div className='w-full h-full rounded-xl relative'>
-                    <img className='w-full h-full rounded-xl' src="/images/1280.jpg" alt="" />
+                    <Image className='w-full h-full rounded-xl' src="/images/1280.jpg" alt={'bg'} />
                     <div className='absolute bottom-[-25px] left-6 md:bottom-[-35px] md:left-10'>
                         <div className='hidden md:block'>
                             <UserAvatar src={null} width={130} height={130} />
