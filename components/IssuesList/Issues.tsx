@@ -48,7 +48,7 @@ export default function Issues({
         try {
             await closeIssues(username, issue_number, accessToken);
             toast.success('成功');
-            router.push(`/users/${username}`)
+            router.push(`/user/${username}`)
         } catch (error) {
             console.error('Error closing issue:', error);
         }
