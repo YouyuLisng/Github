@@ -52,11 +52,11 @@ export default function Search({ searchType }: SearchProps) {
                             render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                <Input
-                                    className='w-[300px] md:w-[550px] h-[48px] rounded-e-none focus-visible:ring-0 focus-visible:ring-offset-0'
-                                    placeholder={`Search a GitHub User ${searchType === 'user' ? 'Repository' : 'Posts'}`}
-                                    {...field}
-                                />
+                                    <Input
+                                        className='w-[300px] md:w-[550px] h-[48px] rounded-e-none focus-visible:ring-0 focus-visible:ring-offset-0'
+                                        placeholder={`Search a GitHub User ${searchType === 'user' ? 'Repository' : 'Posts (Issues)'}`}
+                                        {...field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
