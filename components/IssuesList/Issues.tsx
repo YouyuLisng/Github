@@ -28,7 +28,7 @@ export default function Issues({
     const router = useRouter();
     const [issue, setIssue] = useState<GitHubIssue | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
-    const { accessToken } = useAuthContext();
+    const { currentUser, accessToken } = useAuthContext();
 
     useEffect(() => {
         const fetchIssueData = async () => {
@@ -72,17 +72,19 @@ export default function Issues({
                                 <p className="px-2 text-sm">{username}</p>
                             </div>
                             <div className='flex items-center'>
-                                <div className='relative'>
-                                    <HiOutlineDotsHorizontal onClick={toggleOpen} className='me-2 cursor-pointer' size={20} />
-                                    {isOpen && (
-                                        <div className="absolute rounded-xl shadow-md w-[100px] bg-white overflow-hidden right-0 top-10 text-sm">
-                                            <div className='flex flex-col cursor-pointer text-center'>
-                                                <EditIssuesFormModal issues={issue} />
-                                                <MenuItem  onClick={closeIssue} label='刪除'/>
+                                {currentUser && currentUser.login === issue.user.login && (
+                                    <div className='relative'>
+                                        <HiOutlineDotsHorizontal onClick={toggleOpen} className='me-2 cursor-pointer' size={20} />
+                                        {isOpen && (
+                                            <div className="absolute rounded-xl shadow-md w-[100px] bg-white overflow-hidden right-0 top-10 text-sm">
+                                                <div className='flex flex-col cursor-pointer text-center'>
+                                                    <EditIssuesFormModal issues={issue} />
+                                                    <MenuItem  onClick={closeIssue} label='刪除'/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}
-                                </div>
+                                        )}
+                                    </div>
+                                )}
                                 <Link href={`/users/${username}`}>
                                     <IoCloseOutline size={20} />
                                 </Link>

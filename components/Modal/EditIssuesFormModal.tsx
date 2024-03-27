@@ -31,10 +31,6 @@ export function EditIssuesFormModal({
         return null
     }
 
-    if (currentUser.login !== issues.user.login) {
-        return null
-    }
-
     return (
             <Dialog onOpenChange={handleToggle} open={isOpen}>
                 <div onClick={handleToggle} className='cursor-pointer'>
