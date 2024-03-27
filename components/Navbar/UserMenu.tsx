@@ -67,7 +67,7 @@ const UserMenu = () => {
                         {currentUser ? (
                             <>  
                                 <MenuItem label={currentUser.login} />
-                                <MenuItem onClick={() => { router.push(`/users/${currentUser.login}`); toggleOpen(); }} label='我的文章' />
+                                <MenuItem onClick={() => { router.push(`/user/${currentUser.login}`); toggleOpen(); }} label='我的文章' />
                                 <hr />
                                 <MenuItem label='登出' onClick={() => {handleLogout(); }} />
                             </>
