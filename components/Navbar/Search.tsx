@@ -30,7 +30,7 @@ export default function Search() {
         }
     });
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        route.push(`/user/${values.text}/repos`);
+        route.push(`/users/${values.text}/repos`);
     };
 
     return (
