@@ -15,7 +15,7 @@ function RepoItem({
     repo,
 }: RepoItemProps) {
     return (
-        <Link href={`/user/${repo.owner.login}/repos/${repo.name}`}>
+        <Link href={`/repo/${repo.owner.login}/repos/${repo.name}`}>
             <article className="border-b">
                 <div className="py-2 md:py-4">
                     <div className="flex justify-between items-center">

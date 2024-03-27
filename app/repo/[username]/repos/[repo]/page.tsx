@@ -36,7 +36,7 @@ export default async function RepoPage({ params: { username, repo } } : RepoPage
                             <p className="px-2 text-sm">{username}</p>
                         </div>
                         <div>
-                            <Link href={`/user/${username}/repos`}>
+                            <Link href={`/repo/${username}/repos`}>
                                 <IoCloseOutline size={20} />
                             </Link>
                         </div>
@@ -60,7 +60,7 @@ export default async function RepoPage({ params: { username, repo } } : RepoPage
                         <p className="px-2 text-sm">{username}</p>
                     </div>
                     <div>
-                        <Link href={`/user/${username}/repos`}>
+                        <Link href={`/repo/${username}`}>
                             <IoCloseOutline size={20} />
                         </Link>
                     </div>
