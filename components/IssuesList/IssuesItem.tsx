@@ -14,7 +14,7 @@ function IssuesItem({
     usename
 }: IssuesItemProps) {
     return (
-        <Link href={`/users/${usename}/issues/${issue.number}`}>
+        <Link href={`/user/${usename}/issues/${issue.number}`}>
             <article className="border-b">
                 <div className="py-2 md:py-4">
                     <div className="flex justify-between items-center">

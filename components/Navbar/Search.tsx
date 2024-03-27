@@ -34,9 +34,9 @@ export default function Search({ searchType }: SearchProps) {
         }
     });
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        if (searchType === 'repo') {
+        if (searchType === 'user') {
             route.push(`/repo/${values.text}`);
-        } else if (searchType === 'user') {
+        } else if (searchType === 'repo') {
             route.push(`/user/${values.text}`);
         }
     };

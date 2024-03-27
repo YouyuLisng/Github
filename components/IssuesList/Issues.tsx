@@ -85,7 +85,7 @@ export default function Issues({
                                         )}
                                     </div>
                                 )}
-                                <Link href={`/users/${username}`}>
+                                <Link href={`/user/${username}`}>
                                     <IoCloseOutline size={20} />
                                 </Link>
                             </div>
