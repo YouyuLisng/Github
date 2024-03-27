@@ -53,11 +53,11 @@ const UserMenu = () => {
 
     return (
         <div className="relative">
-            <div className="flex flex-row items-center gap-3">
+            <div  onClick={toggleOpen} className="flex flex-row items-center gap-3">
                 <div className="p-2 md:py-1 text-xs md:px-2 md:text-sm font-bold text-white flex flex-row items-center gap-3 rounded-full cursor-pointer">
                     <Avatar src={currentUser ? currentUser.avatar_url : null} width={30} height={30} />
                     <span>
-                        <BiSolidDownArrow onClick={toggleOpen} size={12} />
+                        <BiSolidDownArrow size={12} />
                     </span>
                 </div>
             </div>

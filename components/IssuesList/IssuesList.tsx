@@ -59,7 +59,7 @@ export function IssuesList({
                 {issues.length > 0 ? (
                     issues.map((issue: GitHubIssue, index: number) => (
                         <div key={index}>
-                            <IssuesItem repo={issue} />
+                            <IssuesItem issue={issue} />
                         </div>
                     ))
                 ) : (
