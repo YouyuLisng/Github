@@ -15,7 +15,7 @@ export function IssuesSkeleton() {
                         <Skeleton className="h-4 w-[200px]" />
                         <Skeleton className="h-4 w-[350px]" />
                         <Skeleton className="h-4 w-[330px]" />
-                        <Skeleton className="h-4 w-[350px]" />
+                        <Skeleton className="h-4 w-[300px]" />
                     </div>
                 </div>
             </div>
