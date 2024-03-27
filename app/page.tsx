@@ -1,6 +1,5 @@
-import { RepoList } from "@/components/RepoList/RepoList";
+
 import type { Metadata } from "next";
-import fetchRepos from "./actions/Repo/fetchRepos";
 import Search from "@/components/Navbar/Search";
 
 export const metadata: Metadata = {
@@ -9,13 +8,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-    const repos = await fetchRepos(1);
     return (
         <>
             <div className="w-full h-[200px] md:h-[400px] flex items-center justify-center">
-                <Search />
+                <div className="grid grid-cols-1 gap-y-5">
+                    <Search searchType={"user"} />
+                    <Search searchType={"repo"} />
+                </div>
             </div>
-            {/* <RepoList repo={repos} /> */}
         </>
     );
 }
