@@ -30,7 +30,7 @@ export default function Search() {
         }
     });
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        route.push(`/users/${values.text}`);
+        route.push(`/user/${values.text}/repos`);
     };
 
     return (
@@ -45,7 +45,7 @@ export default function Search() {
                             <FormItem>
                                 <FormControl>
                                 <Input
-                                    className='w-[350px] md:w-[550px] h-[48px] rounded-e-none focus-visible:ring-0 focus-visible:ring-offset-0'
+                                    className='w-[300px] md:w-[550px] h-[48px] rounded-e-none focus-visible:ring-0 focus-visible:ring-offset-0'
                                     placeholder="Search a GitHub UserName"
                                     {...field}
                                 />

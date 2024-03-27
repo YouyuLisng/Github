@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar/Navbar";
 import Container from "@/components/Container";
 import { AuthProvider } from '@/Context/auth';
 import ToasterProvider from '@/components/providers/ToastProvider';
-import { IssuesFormModal } from "@/components/Modal/IssuesFormModal";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
