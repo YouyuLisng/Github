@@ -8,7 +8,7 @@ async function fetchIssues( username: string, issue_number: number) {
         headers.append('Authorization', 'Bearer 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');
         const response = await fetch(`https://api.github.com/repos/${username}/${repo.name}/issues/${issue_number}`, {
             headers: headers,
-            cache: 'force-cache'
+            cache: 'no-store'
         });
 
         if (!response.ok) {
