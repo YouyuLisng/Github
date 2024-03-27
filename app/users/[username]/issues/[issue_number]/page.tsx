@@ -13,7 +13,7 @@ interface IssuesPageProps {
 export async function generateMetadata( { params: { username, issue_number } }: IssuesPageProps): Promise<Metadata> {
     const Issues = await fetchIssues(username, issue_number);
     return {
-        title:`${username} / ${Issues.title}`,
+        title:`${username} / ${Issues.number}`,
     }
 }
 

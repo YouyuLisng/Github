@@ -3,17 +3,18 @@ import Avatar from '@/components/Avatar';
 import { GitHubIssue } from '@/type/type';
 import Time from '../Time';
 import Link from 'next/link';
-import ReactHtmlParser from 'react-html-parser';
 
 interface IssuesItemProps {
     issue: GitHubIssue;
+    usename: string;
 }
 
 function IssuesItem({
     issue,
+    usename
 }: IssuesItemProps) {
     return (
-        <Link href={`/users/${issue.user.login}/issues/${issue.number}`}>
+        <Link href={`/users/${usename}/issues/${issue.number}`}>
             <article className="border-b">
                 <div className="py-2 md:py-4">
                     <div className="flex justify-between items-center">
