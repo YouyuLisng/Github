@@ -5,7 +5,7 @@ async function fetchFirstRepo(username: string) {
         headers.append('Authorization', 'Bearer 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');
         const response = await fetch(`https://api.github.com/users/${username}/repos?sort=created&page=1&per_page=1`, {
             headers: headers,
-            cache: 'no-store'
+            cache: 'force-cache'
         });
 
         if (!response.ok) {
