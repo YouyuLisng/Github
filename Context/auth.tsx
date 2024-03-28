@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         const clientId = '1d6c5925798aa7391380';
         const scope = 'repo';
         const authUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&scope=${scope}`;
-
         window.location.href = authUrl;
     };
 
