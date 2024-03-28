@@ -2,17 +2,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Loader from '@/components/Loader';
 import { IssuesItemSkeleton } from '@/components/Skeleton/IssuesItemSkeleton';
-import fetchAllIssues from '@/app/actions/Issues/fetchAllIssues';
+import fetchAllIssues from '@/app/actions/Markdown/fetchAllIssues';
 import { GitHubIssue } from '@/type/type';
-import IssuesItem from '@/components/IssuesList/IssuesItem';
+import MarkdownIssuesItem from './MarkdownIssuesItem';
+import { Input } from '../ui/input';
 import { IssuesFormModal } from '../Modal/IssuesFormModal';
-interface IssuesListProps {
+interface MarkdownIssuesListProps {
     username: string;
+    reponame: string;
 }
 
-export function IssuesList({
+export function MarkdownIssuesList({
     username,
-}: IssuesListProps) {
+    reponame
+}: MarkdownIssuesListProps) {
     const [issues, setIssues] = useState<GitHubIssue[]>([]);
     const [loading, setLoading] = useState(false);
     const loadingRef = useRef(false);
@@ -32,7 +35,7 @@ export function IssuesList({
         loadingRef.current = true;
 
         try {
-            const newIssues = await fetchAllIssues(username, pageNumber.current);
+            const newIssues = await fetchAllIssues(username, reponame, pageNumber.current);
             if (newIssues) {
                 setIssues((prevIssues) => [...prevIssues, ...newIssues]);
                 if (newIssues.length < 10) {
@@ -59,7 +62,7 @@ export function IssuesList({
                 {issues.length > 0 ? (
                     issues.map((issue: GitHubIssue, index: number) => (
                         <div key={index}>
-                            <IssuesItem issue={issue} usename={username} />
+                            <MarkdownIssuesItem issue={issue} username={username} reponame={reponame} />
                         </div>
                     ))
                 ) : (
@@ -68,9 +71,9 @@ export function IssuesList({
                     ))
                 )}
                 {loading && <Loader />}
-                {!hasMoreRef.current && <p className="text-center text-gray-500">沒有更多文章了</p>}
+                {!hasMoreRef.current && <p className="text-center text-gray-500">沒有更多評論了</p>}
+                <IssuesFormModal Type={'repo'} reponame={reponame} />
             </div>
-            <IssuesFormModal Type={'user'} reponame={''} />
         </>
     );
 }

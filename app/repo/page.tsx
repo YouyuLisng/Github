@@ -9,6 +9,6 @@ export const metadata: Metadata = {
 
 export default function UsersPage() {
     return (
-        <EmptyState />
+        <EmptyState title='Oops！' subtitle='Not Found' showReaet={true} />
     )
 }

@@ -10,7 +10,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import IssuesForm from './Form/IssuesForm';
+import IssuesForm from './Form/UserIssuesForm';
 
 import { useAuthContext } from '@/Context/auth'
 

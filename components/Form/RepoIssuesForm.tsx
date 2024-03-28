@@ -1,6 +1,5 @@
 "use client"
 import React from 'react'
-import { useRouter } from 'next/navigation';
 import { GitHubUser } from '@/type/type';
 import { useForm } from "react-hook-form"
 import {
@@ -17,15 +16,17 @@ import Texteditor from "@/components/Texteditor";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 import toast from "react-hot-toast";
-import addssues from '@/app/actions/Issues/addssues'
+import addIssues from '@/app/actions/Markdown/addIssues'
 
 interface IssuesFormProps {
+    reponame: string;
     currentUser: GitHubUser,
     accessToken: string;
     handleCloseDialog: () => void;
 }
 
 export default function IssuesForm({
+    reponame,
     currentUser,
     accessToken,
     handleCloseDialog
@@ -45,7 +46,7 @@ export default function IssuesForm({
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const response = await addssues(currentUser.login, values, accessToken);
+            const response = await addIssues(currentUser.login, reponame, values, accessToken);
             
             if (response) {
                 toast.success('成功');

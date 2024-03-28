@@ -2,17 +2,15 @@ import fetchFirstRepo from "./fetchFirstRepo";
 
 async function addIssues(username: string, newData: any, accessToken: string) {
     const repo = await fetchFirstRepo(username);
-    console.log(accessToken)
     try {
         const headers = new Headers();
         headers.append('Accept', 'application/vnd.github.v3+json');
-        headers.append('Authorization', `Bearer ${accessToken}`); // 加入 Authorization 標頭
-
+        headers.append('Authorization', `Bearer ${accessToken}`);
         const response = await fetch(`https://api.github.com/repos/${username}/${repo.name}/issues`, {
             method: "POST",
             headers: headers,
             cache: 'no-store',
-            body: JSON.stringify(newData) // 將更新的資料作為 body 傳遞
+            body: JSON.stringify(newData)
         });
 
         if (!response.ok) {
@@ -21,7 +19,7 @@ async function addIssues(username: string, newData: any, accessToken: string) {
 
         const data = await response.json();
 
-        return data; // Return the response data
+        return data;
     } catch (error) {
         console.error('Error fetching user repositories:', error);
         return null;

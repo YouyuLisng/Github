@@ -18,10 +18,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 import toast from "react-hot-toast";
 import { GitHubIssue } from '@/type/type'
-import editIssues from '@/app/actions/Issues/editIssues'
+import editIssues from '@/app/actions/Markdown/editIssues'
 
 interface EditIssuesFormProps {
     issues: GitHubIssue;
+    reponame: string;
     currentUser: GitHubUser,
     accessToken: string;
     handleCloseDialog: () => void;
@@ -29,6 +30,7 @@ interface EditIssuesFormProps {
 
 export default function EditIssuesForm({
     issues,
+    reponame,
     currentUser,
     accessToken,
     handleCloseDialog
@@ -49,19 +51,16 @@ export default function EditIssuesForm({
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            // 調用 editIssues 函數進行 PATCH 請求
-            const response = await editIssues(currentUser.login, issues.number, values, accessToken);
+            const response = await editIssues(currentUser.login, reponame, issues.number, values, accessToken);
             
             if (response) {
-                // 如果請求成功，執行成功提示和路由跳轉
                 toast.success('成功');
                 handleCloseDialog();
-                router.push(`/users/${currentUser.login}`)
+                router.push(`/user/${currentUser.login}`)
             } else {
                 throw new Error('Failed to update issue');
             }
         } catch (error) {
-            // 處理錯誤
             console.error("未知錯誤:", error);
         }
     };

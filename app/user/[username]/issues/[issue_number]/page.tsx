@@ -1,7 +1,7 @@
 import React from 'react';
 import fetchIssues from '@/app/actions/Issues/fetchIssues';
 import type { Metadata } from "next";
-import UserIssues from '@/components/IssuesList/Issues';
+import Issues from '@/components/IssuesList/Issues';
 
 interface IssuesPageProps {
     params: {
@@ -20,7 +20,7 @@ export async function generateMetadata( { params: { username, issue_number } }: 
 export default async function IssuesPage({ params: { username, issue_number } } : IssuesPageProps) {
     return (
         <div className='max-w-[1320px] mx-auto md:px-2 px-2 bg-white rounded-lg'>
-            <UserIssues username={username} issue_number={issue_number}></UserIssues>
+            <Issues username={username} issue_number={issue_number}></Issues>
         </div>
     );
 }

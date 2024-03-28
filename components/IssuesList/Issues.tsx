@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Time from '../Time';
 import { IoCloseOutline } from 'react-icons/io5';
 import { GitHubIssue } from '@/type/type';
-import ReactHtmlParser from 'react-html-parser';
 import fetchIssues from '@/app/actions/Issues/fetchIssues';
 import { EditIssuesFormModal } from '../Modal/EditIssuesFormModal';
 import { IssuesSkeleton } from '../Skeleton/IssuesSkeleton';
@@ -78,7 +77,7 @@ export default function Issues({
                                         {isOpen && (
                                             <div className="absolute rounded-xl shadow-md w-[100px] bg-white overflow-hidden right-0 top-10 text-sm">
                                                 <div className='flex flex-col cursor-pointer text-center'>
-                                                    <EditIssuesFormModal issues={issue} />
+                                                    <EditIssuesFormModal issues={issue} Type={'user'} reponame={''} />
                                                     <MenuItem  onClick={closeIssue} label='刪除'/>
                                                 </div>
                                             </div>
