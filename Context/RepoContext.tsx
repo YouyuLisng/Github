@@ -32,6 +32,7 @@ export const RepoDataProvider = ({
                 if (newRepos.length < 10) {
                     hasMoreRef.current = false;
                 }
+                pageNumber.current += 1;
             }
         } catch (error) {
             console.error('獲取資料時發生錯誤:', error);
