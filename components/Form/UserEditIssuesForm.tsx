@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 import toast from "react-hot-toast";
 import { GitHubIssue } from '@/type/type'
-import editIssues from '@/app/actions/Markdown/editIssues'
+import editIssues from '@/app/actions/Repo/editIssues'
 
 interface EditIssuesFormProps {
     issues: GitHubIssue;

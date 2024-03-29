@@ -1,13 +1,8 @@
 import React from 'react'
 import fetchUserRepos from '@/app/actions/UserRepo/fetchUserRepos'
 import fetchUser from '@/app/actions/UserRepo/fetchUser'
-import UserAvatar from '@/components/UserAvatar';
-import { UserRepoList } from '@/components/UserRepoList/UserRepoList';
-import { IoIosLink } from "react-icons/io";
-import Link from 'next/link';
-import { Separator } from "@/components/ui/separator"
+import { RepoList } from '@/components/RepoList/RepoList';
 import type { Metadata } from "next";
-import Image from "next/image";
 import EmptyState from '@/components/EmptyState';
 import UserInfo from '@/components/UserInfo';
 interface ReposPageProps {
@@ -43,7 +38,7 @@ export default async function ReposPage({ params: { username } } : ReposPageProp
         <>
             <UserInfo user={user}>
                 {repo.length !== 0 ? (
-                        <UserRepoList username={username} repo={repo} />
+                        <RepoList username={username} repo={repo} />
                 ) : (
                     <EmptyState title={`${username} 目前尚未發佈倉儲`} subtitle='Not Found' showReaet={true} />
                 )}

@@ -11,15 +11,20 @@ interface MarkdownViewerProps {
 
 const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, maxHeight, repository }) => {
     if (!content) {
-        return <p>沒有資料</p>;
+        return <p>内容为空</p>;
     }
     
-    const decodedContent = atob(content);
-    return (
-        <div className="markdown-container overflow-auto mt-4 mb-4" style={{ maxHeight }}>
-            <Markdown className="prose" remarkPlugins={[remarkGfm, [remarkGitHub, { repository: repository }]]}>{decodedContent}</Markdown>
-        </div>
-    );
+    try {
+        const decodedContent = atob(content);
+        return (
+            <div className="markdown-container overflow-auto mt-4 mb-4" style={{ maxHeight }}>
+                <Markdown className="prose" remarkPlugins={[remarkGfm, [remarkGitHub, { repository: repository }]]}>{decodedContent}</Markdown>
+            </div>
+        );
+    } catch (error) {
+        console.error('Markdown 解析错误:', error);
+        return <p>Markdown 解析错误</p>;
+    }
 };
 
 export default MarkdownViewer;

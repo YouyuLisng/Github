@@ -16,7 +16,7 @@ import Texteditor from "@/components/Texteditor";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 import toast from "react-hot-toast";
-import addIssues from '@/app/actions/Markdown/addIssues'
+import addIssues from '@/app/actions/Repo/addIssues'
 
 interface IssuesFormProps {
     reponame: string;

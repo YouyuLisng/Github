@@ -1,11 +1,11 @@
 import React from 'react';
 import { IoCodeSlashOutline } from 'react-icons/io5';
+import { AiFillStar } from "react-icons/ai";
+import { LuEye } from "react-icons/lu";
 import Avatar from '@/components/Avatar';
 import { Repository } from '@/type/type';
-import Link from 'next/link';
-import { AiFillStar } from 'react-icons/ai';
-import { LuEye } from 'react-icons/lu';
 import Time from '../Time';
+import Link from 'next/link';
 
 interface RepoItemProps {
     repo: Repository;
@@ -15,7 +15,7 @@ function RepoItem({
     repo,
 }: RepoItemProps) {
     return (
-        <Link href={`/users/${repo.owner.login}/repos/${repo.name}`}>
+        <Link href={`/repo/${repo.owner.login}/repos/${repo.name}`}>
             <article className="border-b">
                 <div className="py-2 md:py-4">
                     <div className="flex justify-between items-center">

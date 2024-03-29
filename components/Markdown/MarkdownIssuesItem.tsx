@@ -6,7 +6,7 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { EditIssuesFormModal } from '../Modal/EditIssuesFormModal';
 import MenuItem from '../Navbar/MenuItem';
 import { useAuthContext } from '@/Context/auth';
-import closeIssues from '@/app/actions/Markdown/closeIssues';
+import closeIssues from '@/app/actions/Repo/closeIssues';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 

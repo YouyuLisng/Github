@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Loader from '@/components/Loader';
 import { IssuesItemSkeleton } from '@/components/Skeleton/IssuesItemSkeleton';
-import fetchAllIssues from '@/app/actions/Markdown/fetchAllIssues';
+import fetchAllIssues from '@/app/actions/Repo/fetchAllIssues';
 import { GitHubIssue } from '@/type/type';
 import MarkdownIssuesItem from './MarkdownIssuesItem';
 import { Input } from '../ui/input';

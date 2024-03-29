@@ -6,7 +6,7 @@ import EmptyState from '@/components/EmptyState';
 import type { Metadata } from "next";
 import MarkdownPost from '@/components/Markdown/MarkdownPost';
 import { MarkdownIssuesList } from '@/components/Markdown/MarkdownIssuesList';
-import fetchAllIssues from '@/app/actions/Markdown/fetchAllIssues';
+import fetchAllIssues from '@/app/actions/Repo/fetchAllIssues';
 interface RepoPageProps {
     params: {
         username: string;
