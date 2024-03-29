@@ -5,6 +5,7 @@ import { IssuesItemSkeleton } from '@/components/Skeleton/IssuesItemSkeleton';
 import fetchUserRepos from '@/app/actions/UserRepo/fetchUserRepos';
 import { Repository } from '@/type/type';
 import RepoItem from '@/components/RepoList/RepoItem';
+import { useRepoData } from '@/Context/RepoContext';
 
 interface  RepoListProps {
     username: string;
@@ -15,50 +16,43 @@ export function RepoList({
     username,
     repo,
 }: RepoListProps) {
-    const [repos, setRepos] = useState<Repository[]>(repo);
+    const { repoData, fetchRepoData, hasMoreRef } = useRepoData();
     const [loading, setLoading] = useState(false);
     const loadingRef = useRef(false);
-    const pageNumber = useRef(2);
-    const hasMoreRef = useRef(true);
 
     useEffect(() => {
+        loadRepos();
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const loadRepos = async () => {
-        if (loadingRef.current || !hasMoreRef.current) return;
+        if (loadingRef.current || !hasMoreRef) return;
     
         setLoading(true);
         loadingRef.current = true;
     
         try {
-            const newRepos = await fetchUserRepos(username, pageNumber.current, 10);
-            if (newRepos) {
-                setRepos((prevRepos) => [...prevRepos, ...newRepos]);
-                if (newRepos.length < 10) {
-                    hasMoreRef.current = false;
-                }
-            }
-            pageNumber.current += 1;
+            fetchRepoData(username);
         } catch (error) {
             console.error('加載資料時發生錯誤:', error);
         } finally {
             loadingRef.current = false;
             setLoading(false);
+            console.log(repoData, 'ok')
         }
     };
     
     const handleScroll = () => {
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMoreRef.current) return;
+        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMoreRef) return;
         loadRepos();
     };
 
     return (
         <>
             <div className="grid grid-cols-1 gap-3 p-2 md:p-4 bg-white md:rounded-e-xl">
-                {repos.length > 0 ? (
-                    repos.map((repo: Repository, index: number) => (
+                {repoData.length > 0 ? (
+                    repoData.map((repo: Repository, index: number) => (
                         <div key={index}>
                             <RepoItem repo={repo} />
                         </div>
@@ -69,7 +63,7 @@ export function RepoList({
                     ))
                 )}
                 {loading && <Loader />}
-                {!hasMoreRef.current && <p className="text-center text-gray-500">沒有更多資料了</p>}
+                {!hasMoreRef && <p className="text-center text-gray-500">沒有更多資料了</p>}
             </div>
         </>
     );
