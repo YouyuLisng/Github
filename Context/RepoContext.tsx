@@ -7,7 +7,7 @@ interface RepoDataContext {
     setRepoData: React.Dispatch<React.SetStateAction<Repository[]>>;
     fetchRepoData: (username: string) => void;
     resetRepoData: () => void;
-    hasMoreRef: boolean;
+    hasMore: boolean;
     loadingRef: boolean;
 }
 
@@ -18,11 +18,11 @@ export const RepoDataProvider = ({
 }: { children: ReactNode }) => {
     const [repoData, setRepoData] = useState<Repository[]>([]);
     const pageNumber = useRef<number>(1);
-    const hasMoreRef = useRef<boolean>(true);
+    const [hasMore, setHasMore] = useState<boolean>(true);
     const loadingRef = useRef<boolean>(false);
 
     const fetchRepoData = async (username: string) => {
-        if (loadingRef.current || !hasMoreRef.current) return;
+        if (loadingRef.current || !hasMore) return;
         loadingRef.current = true;
 
         try {
@@ -30,7 +30,7 @@ export const RepoDataProvider = ({
             if (newRepos) {
                 setRepoData((prevRepo) => [...prevRepo, ...newRepos]);
                 if (newRepos.length < 10) {
-                    hasMoreRef.current = false;
+                    setHasMore(false);
                 }
             }
         } catch (error) {
@@ -43,7 +43,7 @@ export const RepoDataProvider = ({
     const resetRepoData = () => {
         setRepoData([]);
         pageNumber.current = 1
-        hasMoreRef.current = true;
+        setHasMore(true);
     };
 
     // 提供資料給 Context
@@ -52,7 +52,7 @@ export const RepoDataProvider = ({
         setRepoData,
         fetchRepoData,
         resetRepoData,
-        hasMoreRef: hasMoreRef.current,
+        hasMore,
         loadingRef: loadingRef.current
     };
 

@@ -16,7 +16,7 @@ export function RepoList({
     username,
     repo,
 }: RepoListProps) {
-    const { repoData, fetchRepoData, resetRepoData, hasMoreRef, loadingRef } = useRepoData();
+    const { repoData, fetchRepoData, resetRepoData, hasMore, loadingRef } = useRepoData();
 
     useEffect(() => {
         resetRepoData();
@@ -26,7 +26,7 @@ export function RepoList({
     }, [username]);
     
     const handleScroll = () => {
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMoreRef) return;
+        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMore) return;
         fetchRepoData(username);
     };
 
@@ -45,7 +45,7 @@ export function RepoList({
                     ))
                 )}
                 {loadingRef && <Loader />}
-                {!hasMoreRef && <p className="text-center text-gray-500">沒有更多資料了</p>}
+                {!hasMore && <p className="text-center text-gray-500">沒有更多資料了</p>}
             </div>
         </>
     );
