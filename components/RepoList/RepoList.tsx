@@ -16,9 +16,10 @@ export function RepoList({
     username,
     repo,
 }: RepoListProps) {
-    const { repoData, fetchRepoData, hasMoreRef, loadingRef } = useRepoData();
+    const { repoData, setRepoData, fetchRepoData, hasMoreRef, loadingRef } = useRepoData();
 
     useEffect(() => {
+        setRepoData([]);
         fetchRepoData(username);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
