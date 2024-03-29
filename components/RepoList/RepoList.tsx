@@ -1,8 +1,7 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Loader from '@/components/Loader';
 import { IssuesItemSkeleton } from '@/components/Skeleton/IssuesItemSkeleton';
-import fetchUserRepos from '@/app/actions/UserRepo/fetchUserRepos';
 import { Repository } from '@/type/type';
 import RepoItem from '@/components/RepoList/RepoItem';
 import { useRepoData } from '@/Context/RepoContext';
