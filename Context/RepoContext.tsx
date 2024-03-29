@@ -14,6 +14,7 @@ interface RepoDataContext {
     editRepoIssues: (username: string, reponame: string, issuesNumber: number, values: any, accessToken: string) => Promise<boolean>;
     hasMoreRef: boolean;
     loadingRef: boolean;
+    loading: boolean;
 }
 
 const RepoDataContext = createContext<RepoDataContext | null>(null);
@@ -85,7 +86,8 @@ export const RepoDataProvider = ({
         fetchRepoIssues,
         editRepoIssues,
         hasMoreRef: hasMoreRef.current,
-        loadingRef: loadingRef.current
+        loadingRef: loadingRef.current,
+        loading
     };
 
     return (
