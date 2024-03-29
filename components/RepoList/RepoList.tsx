@@ -23,8 +23,9 @@ export function RepoList({
     }, [username]);
     
     const handleScroll = () => {
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
-        fetchRepoData(username);
+        if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.offsetHeight - 150) {
+            fetchRepoData(username);
+        }        
     };
 
     return (

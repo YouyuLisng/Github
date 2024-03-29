@@ -25,10 +25,12 @@ export const RepoDataProvider = ({
     const pageNumber = useRef<number>(1);
     const hasMoreRef = useRef<boolean>(true);
     const loadingRef = useRef<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const fetchRepoData = async (username: string) => {
         if (loadingRef.current || !hasMoreRef.current) return;
         loadingRef.current = true;
+        setLoading(true);
 
         try {
             const newRepos = await fetchUserRepos(username, pageNumber.current, 10);
@@ -43,6 +45,7 @@ export const RepoDataProvider = ({
             console.error('獲取資料時發生錯誤:', error);
         } finally {
             loadingRef.current = false;
+            setLoading(false);
         }
     };
 
