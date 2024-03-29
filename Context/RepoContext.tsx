@@ -6,6 +6,7 @@ interface RepoDataContext {
     repoData: Repository[];
     setRepoData: React.Dispatch<React.SetStateAction<Repository[]>>;
     fetchRepoData: (username: string) => void;
+    resetRepoData: () => void;
     hasMoreRef: boolean;
     loadingRef: boolean;
 }
@@ -21,7 +22,7 @@ export const RepoDataProvider = ({
     const loadingRef = useRef<boolean>(false);
 
     const fetchRepoData = async (username: string) => {
-        if (loadingRef.current || !hasMoreRef) return;
+        if (loadingRef.current || !hasMoreRef.current) return;
         loadingRef.current = true;
 
         try {
@@ -32,7 +33,6 @@ export const RepoDataProvider = ({
                     hasMoreRef.current = false;
                 }
             }
-            pageNumber.current += 1; // 更新 useRef 中的值
         } catch (error) {
             console.error('獲取資料時發生錯誤:', error);
         } finally {
@@ -40,11 +40,18 @@ export const RepoDataProvider = ({
         }
     };
 
+    const resetRepoData = () => {
+        setRepoData([]);
+        pageNumber.current = 1
+        hasMoreRef.current = true;
+    };
+
     // 提供資料給 Context
     const value: RepoDataContext = {
         repoData,
         setRepoData,
         fetchRepoData,
+        resetRepoData,
         hasMoreRef: hasMoreRef.current,
         loadingRef: loadingRef.current
     };
