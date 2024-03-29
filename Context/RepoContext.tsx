@@ -7,6 +7,7 @@ interface RepoDataContext {
     setRepoData: React.Dispatch<React.SetStateAction<Repository[]>>;
     fetchRepoData: (username: string) => void;
     hasMoreRef: boolean;
+    loadingRef: boolean;
 }
 
 const RepoDataContext = createContext<RepoDataContext | null>(null);
@@ -15,21 +16,27 @@ export const RepoDataProvider = ({
     children
 }: { children: ReactNode }) => {
     const [repoData, setRepoData] = useState<Repository[]>([]);
-    const [pageNumber, setPageNumber] = useState<number>(1);
-    const hasMoreRef = useRef(true);
+    const pageNumber = useRef<number>(1);
+    const hasMoreRef = useRef<boolean>(true);
+    const loadingRef = useRef<boolean>(false);
 
     const fetchRepoData = async (username: string) => {
+        if (loadingRef.current || !hasMoreRef) return;
+        loadingRef.current = true;
+
         try {
-            const newRepos = await fetchUserRepos(username, pageNumber, 10);
+            const newRepos = await fetchUserRepos(username, pageNumber.current, 10);
             if (newRepos) {
                 setRepoData((prevRepo) => [...prevRepo, ...newRepos]);
                 if (newRepos.length < 10) {
                     hasMoreRef.current = false;
                 }
             }
-            setPageNumber(prevPageNumber => prevPageNumber + 1);
+            pageNumber.current += 1; // 更新 useRef 中的值
         } catch (error) {
             console.error('獲取資料時發生錯誤:', error);
+        } finally {
+            loadingRef.current = false;
         }
     };
 
@@ -39,6 +46,7 @@ export const RepoDataProvider = ({
         setRepoData,
         fetchRepoData,
         hasMoreRef: hasMoreRef.current,
+        loadingRef: loadingRef.current
     };
 
     return (

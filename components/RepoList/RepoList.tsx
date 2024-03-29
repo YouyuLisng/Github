@@ -16,35 +16,17 @@ export function RepoList({
     username,
     repo,
 }: RepoListProps) {
-    const { repoData, fetchRepoData, hasMoreRef } = useRepoData();
-    const [loading, setLoading] = useState(false);
-    const loadingRef = useRef(false);
+    const { repoData, fetchRepoData, hasMoreRef, loadingRef } = useRepoData();
 
     useEffect(() => {
-        loadRepos();
+        fetchRepoData(username);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    const loadRepos = async () => {
-        if (loadingRef.current || !hasMoreRef) return;
-    
-        setLoading(true);
-        loadingRef.current = true;
-    
-        try {
-            fetchRepoData(username);
-        } catch (error) {
-            console.error('加載資料時發生錯誤:', error);
-        } finally {
-            loadingRef.current = false;
-            setLoading(false);
-        }
-    };
     
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMoreRef) return;
-        loadRepos();
+        fetchRepoData(username);
     };
 
     return (
@@ -61,7 +43,7 @@ export function RepoList({
                         <IssuesItemSkeleton key={index} />
                     ))
                 )}
-                {loading && <Loader />}
+                {loadingRef && <Loader />}
                 {!hasMoreRef && <p className="text-center text-gray-500">沒有更多資料了</p>}
             </div>
         </>
