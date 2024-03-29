@@ -39,7 +39,6 @@ export function RepoList({
         } finally {
             loadingRef.current = false;
             setLoading(false);
-            console.log(repoData, 'ok')
         }
     };
     
