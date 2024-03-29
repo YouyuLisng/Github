@@ -56,7 +56,7 @@ export default function EditIssuesForm({
             if (response) {
                 toast.success('成功');
                 handleCloseDialog();
-                router.push(`/user/${currentUser.login}`)
+                window.location.reload();
             } else {
                 throw new Error('Failed to update issue');
             }
