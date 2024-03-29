@@ -9,17 +9,14 @@ import { useRepoData } from '@/Context/RepoContext';
 
 interface  RepoListProps {
     username: string;
-    repo: Repository[];
 }
 
 export function RepoList({
     username,
-    repo,
 }: RepoListProps) {
     const { repoData, fetchRepoData, resetRepoData, hasMoreRef, loadingRef } = useRepoData();
 
     useEffect(() => {
-        console.log(hasMoreRef,'ok')
         resetRepoData();
         fetchRepoData(username);
         window.addEventListener('scroll', handleScroll);

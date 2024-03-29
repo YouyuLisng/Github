@@ -38,7 +38,7 @@ export default async function ReposPage({ params: { username } } : ReposPageProp
         <>
             <UserInfo user={user}>
                 {repo.length !== 0 ? (
-                        <RepoList username={username} repo={repo} />
+                        <RepoList username={username} />
                 ) : (
                     <EmptyState title={`${username} 目前尚未發佈倉儲`} subtitle='Not Found' showReaet={true} />
                 )}
