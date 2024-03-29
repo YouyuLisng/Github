@@ -19,6 +19,7 @@ export function RepoList({
     const { repoData, fetchRepoData, resetRepoData, hasMoreRef, loadingRef } = useRepoData();
 
     useEffect(() => {
+        console.log(hasMoreRef,'ok')
         resetRepoData();
         fetchRepoData(username);
         window.addEventListener('scroll', handleScroll);
@@ -26,7 +27,7 @@ export function RepoList({
     }, [username]);
     
     const handleScroll = () => {
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || !hasMoreRef) return;
+        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
         fetchRepoData(username);
     };
 
