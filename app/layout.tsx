@@ -6,6 +6,7 @@ import Container from "@/components/Container";
 import { AuthProvider } from '@/Context/auth';
 import ToasterProvider from '@/components/providers/ToastProvider';
 import { RepoDataProvider } from "@/Context/RepoContext";
+import {IssuesProvider } from "@/Context/IssuesContext";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -21,13 +22,15 @@ export default function RootLayout({
             <body className={inter.className}>
                 <AuthProvider>
                     <RepoDataProvider>
-                        <ToasterProvider />
-                        <Navbar />
-                        <div className="pb-20 pt-16 relative">
-                            <Container>
-                                {children}
-                            </Container>
-                        </div>
+                        <IssuesProvider>
+                            <ToasterProvider />
+                            <Navbar />
+                            <div className="pb-20 pt-16 relative">
+                                <Container>
+                                    {children}
+                                </Container>
+                            </div>
+                        </IssuesProvider>
                     </RepoDataProvider>
                 </AuthProvider>
             </body>
