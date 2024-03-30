@@ -1,4 +1,4 @@
-interface FetchIssueReposProps {
+interface FetchReposParams {
     token?: string;
     userName: string;
     query?: {
@@ -8,7 +8,7 @@ interface FetchIssueReposProps {
     };
 }
 
-async function fetchIssueRepos({
+async function fetchRepos({
     userName,
     token = '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',
     query = {
@@ -16,7 +16,7 @@ async function fetchIssueRepos({
         page: 1,
         perPage: 10,
     },
-}: FetchIssueReposProps) {
+}: FetchReposParams) {
     const request = new Request(
         `https://api.github.com/users/${userName}/repos?sort=${query.sort}&page=${query.page}&per_page=${query.perPage}`,
         {
@@ -28,7 +28,7 @@ async function fetchIssueRepos({
         }
     );
 
-    return fetch(request)
+    return fetch(request, { cache: 'force-cache' })
         .then((res) => {
             if (!res.ok) {
                 throw new Error(
@@ -40,4 +40,4 @@ async function fetchIssueRepos({
         .catch((error) => null);
 }
 
-export { fetchIssueRepos };
+export { type FetchReposParams, fetchRepos };

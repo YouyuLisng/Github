@@ -27,4 +27,4 @@ async function fetchUser({
         .catch((error) => null);
 }
 
-export { fetchUser };
+export { type FetchUserParams, fetchUser };
