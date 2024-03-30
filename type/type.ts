@@ -233,5 +233,4 @@ interface Markdown {
     };
 }
 
-
 export type { Repository, GitHubUser, GitHubIssue, Markdown };

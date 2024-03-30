@@ -7,11 +7,11 @@ import EmptyState from '@/components/EmptyState';
 import UserInfo from '@/components/UserInfo';
 interface ReposPageProps {
     params: {
-        username: string;
+        userName: string;
     };
 }
-export async function generateMetadata( { params: { username } }: ReposPageProps): Promise<Metadata> {
-    const user = await fetchUser(username);
+export async function generateMetadata( { params: { userName } }: ReposPageProps): Promise<Metadata> {
+    const user = await fetchUser(userName);
     if (!user) {
         return {
             title: 'Not found',
@@ -22,14 +22,14 @@ export async function generateMetadata( { params: { username } }: ReposPageProps
     }
 }
 
-export default async function ReposPage({ params: { username } } : ReposPageProps) {
-    const user = await fetchUser(username);
-    const repo = await fetchUserRepos(username, 1, 10);
+export default async function ReposPage({ params: { userName } } : ReposPageProps) {
+    const user = await fetchUser(userName);
+    const repo = await fetchUserRepos(userName, 1, 10);
     if (!user) {
         return (
             <div className='max-w-[760px] mx-auto bg-white'>
                 <UserInfo user={user} >
-                    <EmptyState title={`${username} 此用戶不存在`} subtitle='Not Found' showReaet={true} />
+                    <EmptyState title={`${userName} 此用戶不存在`} subtitle='Not Found' showReaet={true} />
                 </UserInfo>
             </div>
         )
@@ -38,9 +38,9 @@ export default async function ReposPage({ params: { username } } : ReposPageProp
         <>
             <UserInfo user={user}>
                 {repo.length !== 0 ? (
-                        <RepoList username={username} />
+                        <RepoList username={userName} />
                 ) : (
-                    <EmptyState title={`${username} 目前尚未發佈倉儲`} subtitle='Not Found' showReaet={true} />
+                    <EmptyState title={`${userName} 目前尚未發佈倉儲`} subtitle='Not Found' showReaet={true} />
                 )}
             </UserInfo>
         </>
