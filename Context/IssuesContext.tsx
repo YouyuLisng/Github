@@ -6,8 +6,7 @@ interface IssuesDataContext {
     issuesData: GitHubIssue[];
     fetchIssuesData: (username: string) => void;
     resetIssuesData: () => void;
-    hasMoreRef: boolean;
-    loadingRef: boolean;
+    hasMoreData: boolean;
     loading: boolean;
 }
 
@@ -19,12 +18,11 @@ export const IssuesProvider = ({
     const [issuesData, setIssuesData] = useState<GitHubIssue[]>([]);
     const pageNumber = useRef<number>(1);
     const hasMoreRef = useRef<boolean>(true);
-    const loadingRef = useRef<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
 
     const fetchIssuesData = async (username: string) => {
-        if (loadingRef.current || !hasMoreRef.current) return;
-        loadingRef.current = true;
+        if (loading || !hasMoreRef.current) return;
+        
         setLoading(true);
 
         try {
@@ -39,7 +37,6 @@ export const IssuesProvider = ({
         } catch (error) {
             console.error('獲取資料時發生錯誤:', error);
         } finally {
-            loadingRef.current = false;
             setLoading(false);
         }
     };
@@ -55,8 +52,7 @@ export const IssuesProvider = ({
         issuesData,
         fetchIssuesData,
         resetIssuesData,
-        hasMoreRef: hasMoreRef.current,
-        loadingRef: loadingRef.current,
+        hasMoreData: hasMoreRef.current,
         loading
     };
 

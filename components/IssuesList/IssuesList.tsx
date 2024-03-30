@@ -14,7 +14,7 @@ interface IssuesListProps {
 export function IssuesList({
     username,
 }: IssuesListProps) {
-    const { issuesData, fetchIssuesData, resetIssuesData, hasMoreRef, loadingRef } = useIssuesData();
+    const { issuesData, fetchIssuesData, resetIssuesData, hasMoreData, loading } = useIssuesData();
 
     useEffect(() => {
         resetIssuesData();
@@ -43,8 +43,8 @@ export function IssuesList({
                         <IssuesItemSkeleton key={index} />
                     ))
                 )}
-                {loadingRef && <Loader />}
-                {!hasMoreRef && <p className="text-center text-gray-500">沒有更多文章了</p>}
+                {loading && <Loader />}
+                {!hasMoreData && <p className="text-center text-gray-500">沒有更多文章了</p>}
             </div>
             <IssuesFormModal Type={'user'} reponame={''} />
         </>
