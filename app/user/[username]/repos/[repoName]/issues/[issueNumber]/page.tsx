@@ -1,5 +1,5 @@
 import React from 'react';
-import fetchIssues from '@/app/actions/Issues/fetchIssues';
+import { fetchIssuesId } from '@/api/github/fetchIssuesId';
 import type { Metadata } from "next";
 import Issues from '@/components/IssuesList/Issues';
 
@@ -11,10 +11,14 @@ interface IssuesPageProps {
     };
 }
 
-export async function generateMetadata( { params: { userName, issueNumber } }: IssuesPageProps): Promise<Metadata> {
-    const Issues = await fetchIssues(userName, issueNumber);
+export async function generateMetadata( { params: { userName, repoName, issueNumber } }: IssuesPageProps): Promise<Metadata> {
+    const Issues = await fetchIssuesId({
+        userName: userName,
+        repoName: repoName,
+        issuesNumber: issueNumber
+    });
     return {
-        title:`${userName} / ${Issues.number}`,
+        title:`${userName} / ${Issues.title}`,
     }
 }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import type { Metadata } from 'next';
 import EmptyState from '@/components/EmptyState';
 import UserInfo from '@/components/UserInfo';
-import { IssuesClientPage } from './page-client';
 import { IssuesList } from '@/components/IssuesList/IssuesList';
 import { fetchIssues } from '@/api/github/fetchIssues'
 import { fetchUser } from '@/api/github/fetchUser'
