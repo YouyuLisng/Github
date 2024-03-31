@@ -1,6 +1,6 @@
 "use client"
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import getCurrentUser from '@/app/actions/CurrentUser/fetchCurrentUser';
+import { fetchCurrentUser } from '@/api/github/fetchCurrentUser';
 import { GitHubUser } from '@/type/type';
 
 interface AuthContextProps {
@@ -34,7 +34,9 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         const fetchCurrentUserAndRepo = async () => {
             if (accessToken) {
                 try {
-                    const user = await getCurrentUser(accessToken);
+                    const user = await fetchCurrentUser({
+                        token: accessToken
+                    });
                     setCurrentUser(user);
                 } catch (error) {
                     console.error('Error fetching user data:', error);

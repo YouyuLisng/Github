@@ -1,6 +1,6 @@
 import React, { ReactNode, createContext, useContext, useRef, useState } from 'react';
 import { fetchRepos } from '@/api/github/fetchRepos';
-import { Repository, GitHubIssue } from '@/type/type';
+import { Repository } from '@/type/type';
 
 interface RepoDataContext {
     repoData: Repository[];

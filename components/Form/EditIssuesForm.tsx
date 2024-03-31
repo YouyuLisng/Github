@@ -1,7 +1,6 @@
 "use client"
 import React from 'react'
 import { useRouter } from 'next/navigation';
-import { GitHubUser } from '@/type/type';
 import { useForm } from "react-hook-form"
 import {
     Form,
@@ -18,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 import toast from "react-hot-toast";
 import { GitHubIssue } from '@/type/type'
-import editIssues from '@/app/actions/Repo/editIssues'
+import { fetchIssueUpdate }  from '@/api/github/fetchIssueUpdate'
 import { useIssuesData } from '@/Context/IssuesContext';
 
 interface EditIssuesFormProps {
@@ -53,7 +52,13 @@ export default function EditIssuesForm({
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const response = await editIssues(userName, repoName, issues.number, values, accessToken);
+            const response = await fetchIssueUpdate({
+                userName: userName,
+                repoName: repoName,
+                issuesNumber: issues.number,
+                data: values,
+                token: accessToken
+            });
             
             if (response) {
                 toast.success('成功');

@@ -5,12 +5,12 @@ import Link from 'next/link';
 import Time from '../Time';
 import { IoCloseOutline } from 'react-icons/io5';
 import { GitHubIssue } from '@/type/type';
-import fetchIssues from '@/app/actions/Issues/fetchIssues';
+import { fetchIssuesId } from '@/api/github/fetchIssuesId';
 import { EditIssuesFormModal } from '../Modal/EditIssuesFormModal';
 import { IssuesSkeleton } from '../Skeleton/IssuesSkeleton';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import MenuItem from '../Navbar/MenuItem';
-import closeIssues from '@/app/actions/Issues/closeIssues'
+import { fetchIssueDelete } from '@/api/github/fetchIssueDelete'
 import { useAuthContext } from '@/Context/auth';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
@@ -34,7 +34,11 @@ export default function Issues({
     useEffect(() => {
         const fetchIssueData = async () => {
             try {
-                const data = await fetchIssues(userName, issue_number);
+                const data = await fetchIssuesId({
+                    userName: userName,
+                    repoName: repoName,
+                    issuesNumber: issue_number
+                });
                 setIssue(data);
             } catch (error) {
                 console.error('Error fetching issue:', error);
@@ -43,11 +47,16 @@ export default function Issues({
             }
         };
         fetchIssueData();
-    }, [userName, issue_number]);
+    }, [userName, repoName, issue_number]);
 
     const closeIssue = async () => {
         try {
-            await closeIssues(userName, issue_number, accessToken);
+            await fetchIssueDelete({
+                userName: userName,
+                repoName: repoName,
+                issuesNumber: issue_number,
+                token: accessToken,
+            });
             toast.success('成功');
             router.push(`/user/${userName}/repos/${repoName}/issues`);
         } catch (error) {

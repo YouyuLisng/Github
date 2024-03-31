@@ -1,30 +1,24 @@
-interface fetchIssueUpdateParams {
+interface FetchIssuesIdParams {
     token?: string;
     userName: string;
     repoName: string;
     issuesNumber: number,
-    data: {
-        title: string,
-        body: string,
-    },
 }
 
-async function fetchIssueUpdate({
+async function fetchIssuesId({
+    token = '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',
     userName,
     repoName,
-    issuesNumber,
-    token,
-    data
-}: fetchIssueUpdateParams) {
+    issuesNumber
+}: FetchIssuesIdParams) {
     const request = new Request(
         `https://api.github.com/repos/${userName}/${repoName}/issues/${issuesNumber}`,
         {
-            method: 'PATCH',
+            method: 'GET',
             headers: new Headers({
                 Accept: 'application/vnd.github.v3+json',
                 Authorization: `Bearer ${token}`,
             }),
-            body: JSON.stringify(data)
         }
     );
 
@@ -40,4 +34,4 @@ async function fetchIssueUpdate({
         .catch((error) => null);
 }
 
-export { fetchIssueUpdate };
+export { type FetchIssuesIdParams, fetchIssuesId };

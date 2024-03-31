@@ -26,7 +26,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
                     <Button 
                         outline
                         label="返回"
-                        onClick={() => router.push('/') }
+                        onClick={() => router.back() }
                     />
                 )}
             </div>
