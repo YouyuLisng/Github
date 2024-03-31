@@ -11,7 +11,7 @@ interface MarkdownViewerProps {
 
 const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, maxHeight, repository }) => {
     if (!content) {
-        return <p>内容为空</p>;
+        return <p>沒有資料</p>;
     }
     
     try {
@@ -22,8 +22,8 @@ const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, maxHeight, rep
             </div>
         );
     } catch (error) {
-        console.error('Markdown 解析错误:', error);
-        return <p>Markdown 解析错误</p>;
+        console.error('Markdown Error:', error);
+        return <p>Markdown Error</p>;
     }
 };
 

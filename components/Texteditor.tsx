@@ -6,12 +6,11 @@ const DynamicQuill = dynamic(() => import('react-quill'), { ssr: false });
 interface EditorProps {
     content: string;
     setContent: React.Dispatch<React.SetStateAction<string>>;
-    maxHeight?: string; // Optional prop for max height
+    maxHeight?: string;
 }
 
 const Texteditor: React.FC<EditorProps> = ({ content, setContent, maxHeight }) => {
     const handleChange = (value: string) => {
-        // Handle content changes
         setContent(value);
     };
 
