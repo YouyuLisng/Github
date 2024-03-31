@@ -12,8 +12,7 @@ export default async function Home() {
         <>
             <div className="w-full h-[200px] md:h-[400px] flex items-center justify-center">
                 <div className="grid grid-cols-1 gap-y-5">
-                    <Search searchType={"user"} />
-                    <Search searchType={"repo"} />
+                    <Search />
                 </div>
             </div>
         </>

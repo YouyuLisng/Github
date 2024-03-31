@@ -6,15 +6,15 @@ import Link from 'next/link';
 
 interface IssuesItemProps {
     issue: GitHubIssue;
-    usename: string;
+    userName: string;
 }
 
 function IssuesItem({
     issue,
-    usename
+    userName
 }: IssuesItemProps) {
     return (
-        <Link href={`/user/${usename}/issues/${issue.number}`}>
+        <Link href={`/user/${userName}/issues/${issue.number}`}>
             <article className="border-b">
                 <div className="py-2 md:py-4">
                     <div className="flex justify-between items-center">

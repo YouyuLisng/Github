@@ -16,11 +16,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 
-interface SearchProps {
-    searchType: 'user' | 'repo';
-}
-
-export default function Search({ searchType }: SearchProps) {
+export default function Search() {
     const route = useRouter();
 
     const formSchema = z.object({
@@ -34,11 +30,7 @@ export default function Search({ searchType }: SearchProps) {
         }
     });
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        if (searchType === 'user') {
-            route.push(`/repo/${values.text}`);
-        } else if (searchType === 'repo') {
-            route.push(`/user/${values.text}`);
-        }
+        route.push(`/user/${values.text}/repos`);
     };
 
     return (
@@ -54,7 +46,7 @@ export default function Search({ searchType }: SearchProps) {
                                 <FormControl>
                                     <Input
                                         className='w-[300px] md:w-[550px] h-[48px] rounded-e-none focus-visible:ring-0 focus-visible:ring-offset-0'
-                                        placeholder={`Search a GitHub User ${searchType === 'user' ? 'Repository' : 'Posts (Issues)'}`}
+                                        placeholder="Search a GitHub User"
                                         {...field}
                                     />
                                 </FormControl>

@@ -13,25 +13,26 @@ interface IssuesClientPgaeProps
 function IssuesClientPage({
     userName,
     repoName,
-    ...props
 }: IssuesClientPgaeProps) {
     const { issuesData } = useRepoIssuesGet({
         userName,
         repoName,
         query: { page: 1 },
     });
+    
+    if (issuesData.length === 0) {
+        return(
+            <EmptyState
+                title={`${repoName} 目前沒有文章`}
+                subtitle="Not Found"
+                showReaet={true}
+            />
+        )
+    }
 
     return (
         <>
-            {issuesData.length !== 0 ? (
-                <IssuesList username={userName} />
-            ) : (
-                <EmptyState
-                    title={`${userName} 目前尚未發佈文章`}
-                    subtitle="Not Found"
-                    showReaet={true}
-                />
-            )}
+            <IssuesList userName={userName} repoName={repoName} />
         </>
     );
 }

@@ -1,10 +1,10 @@
 import React, { ReactNode, createContext, useContext, useRef, useState } from 'react';
-import fetchAllIssues from '@/app/actions/Issues/fetchAllIssues';
+import { fetchIssues } from '@/api/github/fetchIssues';
 import { GitHubIssue } from '@/type/type';
 
 interface IssuesDataContext {
     issuesData: GitHubIssue[];
-    fetchIssuesData: (username: string) => void;
+    fetchIssuesData: (username: string, reponame: string) => void;
     resetIssuesData: () => void;
     hasMoreData: boolean;
     loading: boolean;
@@ -20,13 +20,23 @@ export const IssuesProvider = ({
     const hasMoreRef = useRef<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const fetchIssuesData = async (username: string) => {
+    const fetchIssuesData = async (username: string, reponame: string) => {
         if (loading || !hasMoreRef.current) return;
         
         setLoading(true);
 
         try {
-            const newIssues = await fetchAllIssues(username, pageNumber.current);
+            const newIssues = await fetchIssues(
+                {
+                    userName: username,
+                    repoName: reponame,
+                    query: {
+                        sort: 'created',
+                        page: pageNumber.current,
+                        perPage: 10,
+                    },
+                }
+            );
             if (newIssues) {
                 setIssuesData((prevIssues) => [...prevIssues, ...newIssues]);
                 if (newIssues.length < 10) {

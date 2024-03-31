@@ -1,17 +1,13 @@
 import React, { ReactNode, createContext, useContext, useRef, useState } from 'react';
-import fetchUserRepos from '@/app/actions/UserRepo/fetchUserRepos';
-import fetchAllIssues from '@/app/actions/Repo/fetchAllIssues';
+import { fetchRepos } from '@/api/github/fetchRepos';
 import editIssues from '@/app/actions/Repo/editIssues';
 import closeIssues from '@/app/actions/Repo/closeIssues';
 import { Repository, GitHubIssue } from '@/type/type';
 
 interface RepoDataContext {
     repoData: Repository[];
-    repoIssues: GitHubIssue[];
     fetchRepoData: (username: string) => void;
     resetRepoData: () => void;
-    fetchRepoIssues: (username: string, reponame: string, issuesNumber: number) => void;
-    editRepoIssues: (username: string, reponame: string, issuesNumber: number, values: any, accessToken: string) => Promise<boolean>;
     hasMoreRef: boolean;
     loadingRef: boolean;
     loading: boolean;
@@ -34,7 +30,14 @@ export const RepoDataProvider = ({
         setLoading(true);
 
         try {
-            const newRepos = await fetchUserRepos(username, pageNumber.current, 10);
+            const newRepos = await fetchRepos({
+                userName: username,
+                query: {
+                    sort: 'created',
+                    page: pageNumber.current,
+                    perPage: 10,
+                },
+            });
             if (newRepos) {
                 setRepoData((prevRepo) => [...prevRepo, ...newRepos]);
                 if (newRepos.length < 10) {
@@ -50,28 +53,6 @@ export const RepoDataProvider = ({
         }
     };
 
-    const [repoIssues, setRepoIssues] = useState<GitHubIssue[]>([]);
-
-    const fetchRepoIssues = async (username: string, reponame: string, issuesNumber: number) => {
-        try {
-            const response = await fetchAllIssues(username, reponame, issuesNumber);
-            return response;
-        } catch (error) {
-            console.error('fetchRepoIssues error:', error);
-            return false;
-        }
-    };
-
-    const editRepoIssues = async (username: string, reponame: string, issuesNumber: number, values: any, accessToken: string): Promise<boolean> => {
-        try {
-            const response = await editIssues(username, reponame, issuesNumber, values, accessToken);
-            return response;
-        } catch (error) {
-            console.error('edit erroe:', error);
-            return false;
-        }
-    };
-
     const resetRepoData = () => {
         setRepoData([]);
         pageNumber.current = 1;
@@ -80,11 +61,8 @@ export const RepoDataProvider = ({
 
     const value: RepoDataContext = {
         repoData,
-        repoIssues,
         fetchRepoData,
         resetRepoData,
-        fetchRepoIssues,
-        editRepoIssues,
         hasMoreRef: hasMoreRef.current,
         loadingRef: loadingRef.current,
         loading

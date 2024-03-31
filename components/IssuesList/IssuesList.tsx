@@ -1,31 +1,33 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Loader from '@/components/Loader';
 import { IssuesItemSkeleton } from '@/components/Skeleton/IssuesItemSkeleton';
-import fetchAllIssues from '@/app/actions/Issues/fetchAllIssues';
 import { GitHubIssue } from '@/type/type';
 import IssuesItem from '@/components/IssuesList/IssuesItem';
 import { IssuesFormModal } from '../Modal/IssuesFormModal';
 import { useIssuesData } from '@/Context/IssuesContext';
+
 interface IssuesListProps {
-    username: string;
+    userName: string;
+    repoName: string;
 }
 
 export function IssuesList({
-    username,
+    userName,
+    repoName
 }: IssuesListProps) {
     const { issuesData, fetchIssuesData, resetIssuesData, hasMoreData, loading } = useIssuesData();
 
     useEffect(() => {
         resetIssuesData();
-        fetchIssuesData(username);
+        fetchIssuesData(userName, repoName);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [username]);
+    }, [userName]);
     
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.offsetHeight - 150) {
-            fetchIssuesData(username);
+            fetchIssuesData(userName, repoName);
         }        
     };
 
@@ -35,7 +37,7 @@ export function IssuesList({
                 {issuesData.length > 0 ? (
                     issuesData.map((issue: GitHubIssue, index: number) => (
                         <div key={index}>
-                            <IssuesItem issue={issue} usename={username} />
+                            <IssuesItem issue={issue} userName={userName} />
                         </div>
                     ))
                 ) : (

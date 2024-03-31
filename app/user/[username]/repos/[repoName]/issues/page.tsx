@@ -1,7 +1,5 @@
 import React from 'react';
-import fetchAllIssues from '@/app/actions/Issues/fetchAllIssues';
 import fetchUser from '@/app/actions/UserRepo/fetchUser';
-import { IssuesList } from '@/components/IssuesList/IssuesList';
 import type { Metadata } from 'next';
 import EmptyState from '@/components/EmptyState';
 import UserInfo from '@/components/UserInfo';
@@ -32,7 +30,6 @@ export default async function Users({
     params: { userName, repoName },
 }: UsersProps) {
     const user = await fetchUser(userName);
-    const Issues = await fetchAllIssues(userName, 1);
     if (!user) {
         return (
             <div className="max-w-[760px] mx-auto bg-white">
