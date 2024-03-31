@@ -1,7 +1,5 @@
 "use client"
 import React from 'react'
-import { useRouter } from 'next/navigation';
-import { GitHubUser } from '@/type/type';
 import { useForm } from "react-hook-form"
 import {
     Form,
@@ -17,20 +15,23 @@ import Texteditor from "@/components/Texteditor";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 import toast from "react-hot-toast";
-import addIssues from '@/app/actions/Issues/addIssues'
+import addIssues from '@/app/actions/Repo/addIssues'
+import { useIssuesData } from '@/Context/IssuesContext';
 
 interface IssuesFormProps {
-    currentUser: GitHubUser,
+    userName: string,
+    repoName: string,
     accessToken: string;
     handleCloseDialog: () => void;
 }
 
 export default function IssuesForm({
-    currentUser,
+    userName,
+    repoName,
     accessToken,
     handleCloseDialog
 }: IssuesFormProps) {
-    const router = useRouter();
+    const { fetchIssuesData, resetIssuesData } = useIssuesData();
     const formSchema = z.object({
         title: z.string().min(1, { message: "title必須填寫" }),
         body: z.string().min(30, { message: "內容至少需要30字" }),
@@ -46,12 +47,13 @@ export default function IssuesForm({
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const response = await addIssues(currentUser.login, values, accessToken);
+            const response = await addIssues(userName, repoName, values, accessToken);
             
             if (response) {
                 toast.success('成功');
+                resetIssuesData();
+                fetchIssuesData(userName, repoName);
                 handleCloseDialog();
-                router.push(`/user/${currentUser.login}`)
             } else {
                 throw new Error('Failed to update issue');
             }

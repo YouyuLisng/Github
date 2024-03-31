@@ -48,7 +48,7 @@ export function IssuesList({
                 {loading && <Loader />}
                 {!hasMoreRef && <p className="text-center text-gray-500">沒有更多文章了</p>}
             </div>
-            <IssuesFormModal Type={'user'} reponame={''} />
+            <IssuesFormModal userName={userName} repoName={repoName} />
         </>
     );
 }

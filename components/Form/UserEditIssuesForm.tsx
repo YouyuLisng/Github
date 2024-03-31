@@ -19,23 +19,25 @@ import { Button } from "@/components/ui/button"
 import toast from "react-hot-toast";
 import { GitHubIssue } from '@/type/type'
 import editIssues from '@/app/actions/Repo/editIssues'
+import { useIssuesData } from '@/Context/IssuesContext';
 
 interface EditIssuesFormProps {
     issues: GitHubIssue;
-    reponame: string;
-    currentUser: GitHubUser,
+    userName: string;
+    repoName: string;
     accessToken: string;
     handleCloseDialog: () => void;
 }
 
 export default function EditIssuesForm({
     issues,
-    reponame,
-    currentUser,
+    userName,
+    repoName,
     accessToken,
     handleCloseDialog
 }: EditIssuesFormProps) {
     const router = useRouter();
+    const { fetchIssuesData, resetIssuesData } = useIssuesData();
     const formSchema = z.object({
         title: z.string().min(1, { message: "title必須填寫" }),
         body: z.string().min(30, { message: "內容至少需要30字" }),
@@ -51,12 +53,14 @@ export default function EditIssuesForm({
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const response = await editIssues(currentUser.login, reponame, issues.number, values, accessToken);
+            const response = await editIssues(userName, repoName, issues.number, values, accessToken);
             
             if (response) {
                 toast.success('成功');
+                resetIssuesData();
+                fetchIssuesData(userName, repoName);
                 handleCloseDialog();
-                window.location.reload();
+                router.push(`/user/${userName}/repos/${repoName}/issues`)
             } else {
                 throw new Error('Failed to update issue');
             }

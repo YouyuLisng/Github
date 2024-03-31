@@ -16,12 +16,14 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
 interface IssuesProps {
-    username: string;
+    userName: string;
+    repoName: string;
     issue_number: number;
 }
 
 export default function Issues({
-    username,
+    userName,
+    repoName,
     issue_number,
 }: IssuesProps) {
     const router = useRouter();
@@ -32,7 +34,7 @@ export default function Issues({
     useEffect(() => {
         const fetchIssueData = async () => {
             try {
-                const data = await fetchIssues(username, issue_number);
+                const data = await fetchIssues(userName, issue_number);
                 setIssue(data);
             } catch (error) {
                 console.error('Error fetching issue:', error);
@@ -41,13 +43,13 @@ export default function Issues({
             }
         };
         fetchIssueData();
-    }, [username, issue_number]);
+    }, [userName, issue_number]);
 
     const closeIssue = async () => {
         try {
-            await closeIssues(username, issue_number, accessToken);
+            await closeIssues(userName, issue_number, accessToken);
             toast.success('成功');
-            router.push(`/user/${username}`)
+            router.push(`/user/${userName}/repos/${repoName}/issues`);
         } catch (error) {
             console.error('Error closing issue:', error);
         }
@@ -68,7 +70,7 @@ export default function Issues({
                         <div className='flex items-center justify-between mb-4'>
                             <div className='flex items-center'>
                                 <Avatar src={issue.user.avatar_url} width={32} height={32} />
-                                <p className="px-2 text-sm">{username}</p>
+                                <p className="px-2 text-sm">{userName}</p>
                             </div>
                             <div className='flex items-center'>
                                 {currentUser && currentUser.login === issue.user.login && (
@@ -77,14 +79,14 @@ export default function Issues({
                                         {isOpen && (
                                             <div className="absolute rounded-xl shadow-md w-[100px] bg-white overflow-hidden right-0 top-10 text-sm">
                                                 <div className='flex flex-col cursor-pointer text-center'>
-                                                    <EditIssuesFormModal issues={issue} Type={'user'} reponame={''} />
+                                                    <EditIssuesFormModal userName={userName} repoName={repoName} issues={issue} />
                                                     <MenuItem  onClick={closeIssue} label='刪除'/>
                                                 </div>
                                             </div>
                                         )}
                                     </div>
                                 )}
-                                <Link href={`/user/${username}`}>
+                                <Link href={`/user/${userName}/repos/${repoName}/issues`}>
                                     <IoCloseOutline size={20} />
                                 </Link>
                             </div>

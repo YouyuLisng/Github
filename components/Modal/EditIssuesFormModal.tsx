@@ -10,20 +10,19 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import UserEditIssuesForm from '@/components/Form/UserEditIssuesForm';
-import RepoEditIssuesForm from '@/components/Form/RepoEditIssuesForm';
 import { useAuthContext } from '@/Context/auth'
 import { GitHubIssue } from '@/type/type'
 import MenuItem from '../Navbar/MenuItem';
 
 interface EditIssuesFormModalProps {
-    Type: "user" | "repo";
-    reponame: string;
+    userName: string;
+    repoName: string;
     issues: GitHubIssue;
 }
 
 export function EditIssuesFormModal({
-    Type,
-    reponame,
+    userName,
+    repoName,
     issues,
 }: EditIssuesFormModalProps) {
     const { currentUser, accessToken } = useAuthContext();
@@ -43,13 +42,9 @@ export function EditIssuesFormModal({
                 </div>
                 <DialogContent className="sm:max-w-[300px] md:max-w-[800px] lg:max-w-[1000px]">
                     <DialogHeader>
-                        <DialogTitle>{Type === "user" ? "編輯文章" : "編輯留言"}</DialogTitle>
+                        <DialogTitle>編輯文章</DialogTitle>
                     </DialogHeader>
-                    {Type === "user" ? (
-                        <UserEditIssuesForm currentUser={currentUser} accessToken={accessToken} handleCloseDialog={handleToggle} issues={issues} reponame={''} />
-                    ) : (
-                        <RepoEditIssuesForm currentUser={currentUser} reponame={reponame} accessToken={accessToken} handleCloseDialog={handleToggle} issues={issues} />
-                    )}
+                    <UserEditIssuesForm userName={userName} accessToken={accessToken} handleCloseDialog={handleToggle} issues={issues} repoName={repoName} />
                 </DialogContent>
             </Dialog>
     )

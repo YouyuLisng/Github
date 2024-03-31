@@ -66,8 +66,7 @@ const UserMenu = () => {
                     <div className='flex flex-col cursor-pointer'>
                         {currentUser ? (
                             <>  
-                                <MenuItem label={currentUser.login} />
-                                <MenuItem onClick={() => { router.push(`/user/${currentUser.login}`); toggleOpen(); }} label='我的文章' />
+                                <MenuItem onClick={() => { router.push(`/user/${currentUser.login}/repos`); toggleOpen(); }} label={currentUser.login} />
                                 <hr />
                                 <MenuItem label='登出' onClick={() => {handleLogout(); }} />
                             </>
