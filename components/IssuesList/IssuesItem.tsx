@@ -7,14 +7,16 @@ import Link from 'next/link';
 interface IssuesItemProps {
     issue: GitHubIssue;
     userName: string;
+    repoName: string;
 }
 
 function IssuesItem({
     issue,
-    userName
+    userName,
+    repoName
 }: IssuesItemProps) {
     return (
-        <Link href={`/user/${userName}/issues/${issue.number}`}>
+        <Link href={`/user/${userName}/repos/${repoName}/issues/${issue.number}`}>
             <article className="border-b">
                 <div className="py-2 md:py-4">
                     <div className="flex justify-between items-center">

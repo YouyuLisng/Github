@@ -16,7 +16,7 @@ export function IssuesList({
     userName,
     repoName
 }: IssuesListProps) {
-    const { issuesData, fetchIssuesData, resetIssuesData, hasMoreData, loading } = useIssuesData();
+    const { issuesData, fetchIssuesData, resetIssuesData, hasMoreRef, loading } = useIssuesData();
 
     useEffect(() => {
         resetIssuesData();
@@ -37,7 +37,7 @@ export function IssuesList({
                 {issuesData.length > 0 ? (
                     issuesData.map((issue: GitHubIssue, index: number) => (
                         <div key={index}>
-                            <IssuesItem issue={issue} userName={userName} />
+                            <IssuesItem issue={issue} userName={userName} repoName={repoName} />
                         </div>
                     ))
                 ) : (
@@ -46,7 +46,7 @@ export function IssuesList({
                     ))
                 )}
                 {loading && <Loader />}
-                {!hasMoreData && <p className="text-center text-gray-500">沒有更多文章了</p>}
+                {!hasMoreRef && <p className="text-center text-gray-500">沒有更多文章了</p>}
             </div>
             <IssuesFormModal Type={'user'} reponame={''} />
         </>

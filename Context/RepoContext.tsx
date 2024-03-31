@@ -1,7 +1,5 @@
 import React, { ReactNode, createContext, useContext, useRef, useState } from 'react';
 import { fetchRepos } from '@/api/github/fetchRepos';
-import editIssues from '@/app/actions/Repo/editIssues';
-import closeIssues from '@/app/actions/Repo/closeIssues';
 import { Repository, GitHubIssue } from '@/type/type';
 
 interface RepoDataContext {

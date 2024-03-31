@@ -1,6 +1,6 @@
 import React from 'react'
-import fetchUserRepos from '@/app/actions/UserRepo/fetchUserRepos'
-import fetchUser from '@/app/actions/UserRepo/fetchUser'
+import { fetchRepos } from '@/api/github/fetchRepos'
+import { fetchUser } from '@/api/github/fetchUser'
 import { RepoList } from '@/components/RepoList/RepoList';
 import type { Metadata } from "next";
 import EmptyState from '@/components/EmptyState';
@@ -11,7 +11,9 @@ interface ReposPageProps {
     };
 }
 export async function generateMetadata( { params: { userName } }: ReposPageProps): Promise<Metadata> {
-    const user = await fetchUser(userName);
+    const user = await fetchUser({
+        userName: userName
+    });
     if (!user) {
         return {
             title: 'Not found',
@@ -23,8 +25,8 @@ export async function generateMetadata( { params: { userName } }: ReposPageProps
 }
 
 export default async function ReposPage({ params: { userName } } : ReposPageProps) {
-    const user = await fetchUser(userName);
-    const repo = await fetchUserRepos(userName, 1, 10);
+    const user = await fetchUser({ userName: userName });
+    const repo = await fetchRepos({ userName: userName });
     if (!user) {
         return (
             <div className='max-w-[760px] mx-auto bg-white'>
@@ -37,7 +39,11 @@ export default async function ReposPage({ params: { userName } } : ReposPageProp
 
     if (repo.length === 0) {
         return (
-            <EmptyState title={`${userName} 目前尚未發佈倉儲`} subtitle='Not Found' showReaet={true} />
+            <>
+                <UserInfo user={user} >
+                    <EmptyState title={`${userName} 目前尚未發佈倉儲`} subtitle='Not Found' showReaet={true} />
+                </UserInfo>
+            </>
         )
     }
 

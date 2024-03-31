@@ -6,7 +6,7 @@ import Container from "@/components/Container";
 import { AuthProvider } from '@/Context/auth';
 import ToasterProvider from '@/components/providers/ToastProvider';
 import { RepoDataProvider } from "@/Context/RepoContext";
-import {IssuesProvider } from "@/Context/IssuesContext";
+import { IssuesProvider } from "@/Context/IssuesContext";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
