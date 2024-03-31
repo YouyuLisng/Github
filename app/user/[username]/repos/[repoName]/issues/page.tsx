@@ -49,7 +49,7 @@ export default async function Users({
     if (issues.length === 0) {
         return (
             <UserInfo user={user} >
-                <EmptyState title={`${userName} 目前沒有文章`} subtitle='Not Found' showReaet={true} />
+                <EmptyState title={`${repoName} 目前沒有文章`} subtitle='Not Found' showReaet={true} />
             </UserInfo>
         )
     }
