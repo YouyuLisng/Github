@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-import Search from "@/components/Navbar/Search";
+import Search from "@/components/Search";
 
 export const metadata: Metadata = {
     title: "Dcard 2024 Web Frontend Intern Homework",
