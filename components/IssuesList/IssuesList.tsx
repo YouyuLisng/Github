@@ -6,6 +6,7 @@ import { GitHubIssue } from '@/type/type';
 import IssuesItem from '@/components/IssuesList/IssuesItem';
 import { IssuesFormModal } from '../Modal/IssuesFormModal';
 import { useIssuesData } from '@/Context/IssuesContext';
+import EmptyState from '@/components/EmptyState';
 
 interface IssuesListProps {
     userName: string;
@@ -23,28 +24,43 @@ export function IssuesList({
         fetchIssuesData(userName, repoName);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [userName]);
+    }, [userName, repoName]);
     
     const handleScroll = () => {
-        if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.offsetHeight - 150) {
+        if (!loading && window.innerHeight + document.documentElement.scrollTop > document.documentElement.offsetHeight - 150) {
             fetchIssuesData(userName, repoName);
         }        
     };
 
+    if (loading) {
+        return (
+            <div className="grid grid-cols-1 gap-3 p-2 md:p-4 bg-white md:rounded-e-xl">
+                {Array.from({ length: 10 }).map((_, index) => (
+                    <IssuesItemSkeleton key={index} />
+                ))}
+                <Loader />
+            </div>
+        );
+    }
+
+    if (issuesData.length === 0) {
+        return (
+            <EmptyState
+                title={`${userName}/${repoName} 目前尚未發佈問題`}
+                subtitle="Not Found"
+                showReaet={true}
+            />
+        );
+    }
+
     return (
         <>
             <div className="grid grid-cols-1 gap-3 p-2 md:p-4 bg-white md:rounded-e-xl">
-                {issuesData.length > 0 ? (
-                    issuesData.map((issue: GitHubIssue, index: number) => (
-                        <div key={index}>
-                            <IssuesItem issue={issue} userName={userName} repoName={repoName} />
-                        </div>
-                    ))
-                ) : (
-                    Array.from({ length: 10 }).map((_, index) => (
-                        <IssuesItemSkeleton key={index} />
-                    ))
-                )}
+                {issuesData.map((issue: GitHubIssue, index: number) => (
+                    <div key={index}>
+                        <IssuesItem issue={issue} userName={userName} repoName={repoName} />
+                    </div>
+                ))}
                 {loading && <Loader />}
                 {!hasMoreRef && <p className="text-center text-gray-500">沒有更多文章了</p>}
             </div>
