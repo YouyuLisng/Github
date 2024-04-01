@@ -14,7 +14,7 @@ interface RepoListProps {
 export function RepoList({
     username,
 }: RepoListProps) {
-    const { repoData, fetchRepoData, resetRepoData, hasMoreRef, loadingRef, loading } = useRepoData();
+    const { repoData, fetchRepoData, resetRepoData, hasMoreRef, loading } = useRepoData();
 
     useEffect(() => {
         resetRepoData();
@@ -56,7 +56,7 @@ export function RepoList({
                     <RepoItem repo={repo} />
                 </div>
             ))}
-            {loadingRef && <Loader />}
+            {loading && <Loader />}
             {!hasMoreRef && <p className="text-sm md:text-md text-center text-gray-500">沒有更多資料了</p>}
         </div>
     );
