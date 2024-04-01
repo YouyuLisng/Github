@@ -28,7 +28,7 @@ function IssuesItem({
                     </div>
                     <div className="py-3">
                         <p className="text-md md:text-xl mb-2">{issue.title}</p>
-                        <div className="text-xs md:text-sm text-zinc-500 max-h-[40px] overflow-hidden" dangerouslySetInnerHTML={{ __html: issue.body }}>
+                        <div className="text-xs md:text-sm text-zinc-500 max-h-[30px] md:max-h-[40px] overflow-hidden" dangerouslySetInnerHTML={{ __html: issue.body }}>
                             
                         </div>
                     </div>

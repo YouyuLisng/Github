@@ -1,5 +1,4 @@
 import React from 'react'
-import { fetchRepos } from '@/api/github/fetchRepos'
 import { fetchUser } from '@/api/github/fetchUser'
 import { RepoList } from '@/components/RepoList/RepoList';
 import type { Metadata } from "next";
@@ -20,7 +19,7 @@ export async function generateMetadata( { params: { userName } }: ReposPageProps
             title: 'Not found',
         }
     }
-    
+
     return {
         title: user.login,
     }

@@ -57,7 +57,7 @@ export function RepoList({
                 </div>
             ))}
             {loadingRef && <Loader />}
-            {!hasMoreRef && <p className="text-center text-gray-500">沒有更多資料了</p>}
+            {!hasMoreRef && <p className="text-sm md:text-md text-center text-gray-500">沒有更多資料了</p>}
         </div>
     );
 }

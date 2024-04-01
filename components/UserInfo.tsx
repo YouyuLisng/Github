@@ -30,10 +30,10 @@ export default function UserInfo({
             </div>
             <div className='px-5 py-6 md:px-10 md:py-12'>
                 <div className='px-2 md:px-4'>
-                    <p className="text-md md:text-2xl font-bold">{user?.login}</p>
-                    <b className='text-sm text-zinc-500'>@ {user?.login}</b>
+                    <p className="text-sm md:text-md md:text-2xl font-bold">{user?.login}</p>
+                    <b className='text-xs md:text-sm text-zinc-500'>@ {user?.login}</b>
                     {user?.blog && user.blog.trim() !== '' && (
-                        <div className='flex items-center text-sm text-zinc-500'>
+                        <div className='flex items-center text-xs md:text-sm text-zinc-500'>
                             <IoIosLink size={14} />
                             <Link href={user.blog}>{user.blog}</Link>
                         </div>
