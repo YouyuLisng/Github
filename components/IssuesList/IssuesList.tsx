@@ -46,7 +46,7 @@ export function IssuesList({
     if (issuesData.length === 0) {
         return (
             <EmptyState
-                title={`${userName}/${repoName} 目前尚未發佈問題`}
+                title={`${userName}/${repoName} 目前尚未發佈文章`}
                 subtitle="Not Found"
                 showReaet={true}
             />
