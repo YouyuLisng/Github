@@ -32,7 +32,7 @@ export function IssuesList({
         }        
     };
 
-    if (loading) {
+    if (issuesData.length === 0) {
         return (
             <div className="grid grid-cols-1 gap-3 p-2 md:p-4 bg-white md:rounded-e-xl">
                 {Array.from({ length: 10 }).map((_, index) => (
@@ -40,16 +40,6 @@ export function IssuesList({
                 ))}
                 <Loader />
             </div>
-        );
-    }
-
-    if (issuesData.length === 0) {
-        return (
-            <EmptyState
-                title={`${userName}/${repoName} 目前尚未發佈文章`}
-                subtitle="Not Found"
-                showReaet={true}
-            />
         );
     }
 

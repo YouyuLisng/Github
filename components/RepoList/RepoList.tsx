@@ -29,23 +29,13 @@ export function RepoList({
         }        
     };
 
-    if (loading) {
+    if (repoData.length === 0) {
         return (
             <div className="grid grid-cols-1 gap-3 p-2 md:p-4 bg-white md:rounded-e-xl">
                 {Array.from({ length: 10 }).map((_, index) => (
                     <IssuesItemSkeleton key={index} />
                 ))}
             </div>
-        );
-    }
-
-    if (repoData.length === 0) {
-        return (
-            <EmptyState
-                title={`${username} 目前尚未發佈倉儲`}
-                subtitle="Not Found"
-                showReaet={true}
-            />
         );
     }
 
