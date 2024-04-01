@@ -11,16 +11,9 @@ interface ReposPageProps {
     };
 }
 export async function generateMetadata( { params: { userName } }: ReposPageProps): Promise<Metadata> {
-    const user = await fetchUser({
-        userName: userName
-    });
-    if (!user) {
-        return {
-            title: 'Not found',
-        }
-    }
+    
     return {
-        title: user.login,
+        title: userName,
     }
 }
 

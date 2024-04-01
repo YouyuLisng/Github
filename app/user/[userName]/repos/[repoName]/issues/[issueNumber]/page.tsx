@@ -12,13 +12,9 @@ interface IssuesPageProps {
 }
 
 export async function generateMetadata( { params: { userName, repoName, issueNumber } }: IssuesPageProps): Promise<Metadata> {
-    const Issues = await fetchIssuesId({
-        userName: userName,
-        repoName: repoName,
-        issuesNumber: issueNumber
-    });
+
     return {
-        title:`${userName} / ${Issues.title}`,
+        title:`${userName} / ${repoName} / ${issueNumber}`,
     }
 }
 

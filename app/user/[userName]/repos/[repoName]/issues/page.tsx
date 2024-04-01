@@ -12,17 +12,10 @@ interface UsersProps {
     };
 }
 export async function generateMetadata({
-    params: { userName },
+    params: { userName, repoName }
 }: UsersProps): Promise<Metadata> {
-    const user = await fetchUser({ userName: userName});
-
-    if (!user) {
-        return {
-            title: 'Not found',
-        };
-    }
     return {
-        title: user.login,
+        title:`${userName} / ${repoName}`,
     };
 }
 
