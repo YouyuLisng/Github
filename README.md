@@ -31,4 +31,19 @@
 ```
 https://github.com/YouyuLisng/dcard-demo.git
 ```
-- 在終端機移動到
+- 在終端機移動到儲存庫的資料夾或者將下載的檔案拉取到終端機
+```
+cd dcard-demo
+```
+- 請依序順序執行下方指令
+```
+npm i
+```
+```
+npm run dev
+```
+
+## 專案說明 
+
+### 路由說明:
+[首頁](http://localhost:3000/):路徑為 /
