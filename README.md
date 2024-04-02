@@ -27,7 +27,7 @@
 - Tailwind CSS
 
 ## 如何啟動專案
-- 請通過git clone通過或從發布下載此存儲庫
+- 請通過git clone 複製下方網址複製儲存庫
 ```
-npm run build
+https://github.com/YouyuLisng/dcard-demo.git
 ```
