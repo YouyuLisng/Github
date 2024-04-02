@@ -53,3 +53,9 @@ npm run dev
 [使用者倉儲頁面](http://localhost:3000/user/YouyuLisng/repoName/Dcard/issues): 路徑結構為 /user/[userName]/repos/[repoName]/issues
 
 [倉儲中的Issues內容](http://localhost:3000/user/YouyuLisng/repoName/Dcard/issues/20): 路徑結構為 /user/[userName]/repos/[repoName]/issues/[issueNumber]
+
+### 頁面以及Layout說明:
+
+每個頁面都會有Navbar 
+
+首頁會有Search Input 可以輸入使用者名稱進行搜索
