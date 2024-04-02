@@ -5,8 +5,8 @@ const nextConfig = {
     },
     env: {
         GITHUB_ACCESS_TOKEN: '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',
-        GITHUB_ID: '1d6c5925798aa7391380',
-        GITHUB_SECRET: '9e733dd6bc55c1034ecf7b76796134f98e4e08ff',
+        GITHUB_ID: '5971d9d0ee9a1d49c617',
+        GITHUB_SECRET: '1b84216e7345e577a744dbc60827027999de4aa3',
     },
     async redirects() {
         return [
