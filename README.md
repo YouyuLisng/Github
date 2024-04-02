@@ -47,3 +47,9 @@ npm run dev
 
 ### 路由說明:
 [首頁](http://localhost:3000/):路徑為 /
+
+[使用者頁面](http://localhost:3000/user/YouyuLisng/repos): 路徑結構為 /user/[userName]/repos
+
+[使用者倉儲頁面](http://localhost:3000/user/YouyuLisng/repoName/Dcard/issues): 路徑結構為 /user/[userName]/repos/[repoName]/issues
+
+[倉儲中的Issues內容](http://localhost:3000/user/YouyuLisng/repoName/Dcard/issues/20): 路徑結構為 /user/[userName]/repos/[repoName]/issues/[issueNumber]
