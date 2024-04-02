@@ -3,7 +3,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Container from "@/components/Container";
-import { AuthProvider } from '@/Context/auth';
+import { AuthProvider } from '@/Context/AuthContext';
 import ToasterProvider from '@/components/providers/ToastProvider';
 import { RepoDataProvider } from "@/Context/RepoContext";
 import { IssuesProvider } from "@/Context/IssuesContext";

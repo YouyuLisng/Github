@@ -20,6 +20,7 @@ export async function generateMetadata( { params: { userName } }: ReposPageProps
 export default async function ReposPage({ params: { userName } } : ReposPageProps) {
     const user = await fetchUser({ userName: userName });
     const repo = await fetchRepos({ userName: userName });
+    
     if (!user) {
         return (
             <div className='max-w-[760px] mx-auto bg-white'>

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FaEdit } from "react-icons/fa";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import UserIssuesForm from '@/components/Form/IssuesForm';
-import { useAuthContext } from '@/Context/auth';
+import { useAuthContext } from '@/Context/AuthContext';
 
 interface IssuesFormModalProps {
     userName: string;

@@ -3,7 +3,7 @@ import { BiSolidDownArrow } from "react-icons/bi";
 import MenuItem from './MenuItem';
 import { useRouter } from 'next/navigation';
 import Avatar from "../Avatar";
-import { useAuthContext } from '@/Context/auth'
+import { useAuthContext } from '@/Context/AuthContext'
 
 const UserMenu = () => {
     const router = useRouter();

@@ -11,7 +11,7 @@ import { IssuesSkeleton } from '../Skeleton/IssuesSkeleton';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import MenuItem from '../Navbar/MenuItem';
 import { fetchIssueDelete } from '@/api/github/fetchIssueDelete'
-import { useAuthContext } from '@/Context/auth';
+import { useAuthContext } from '@/Context/AuthContext';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 

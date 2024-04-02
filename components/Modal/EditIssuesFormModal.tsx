@@ -10,7 +10,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import UserEditIssuesForm from '@/components/Form/EditIssuesForm';
-import { useAuthContext } from '@/Context/auth'
+import { useAuthContext } from '@/Context/AuthContext'
 import { GitHubIssue } from '@/type/type'
 import MenuItem from '../Navbar/MenuItem';
 
