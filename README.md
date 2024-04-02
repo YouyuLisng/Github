@@ -54,8 +54,11 @@ npm run dev
 
 [倉儲中的Issues內容](http://localhost:3000/user/YouyuLisng/repoName/Dcard/issues/20): 路徑結構為 /user/[userName]/repos/[repoName]/issues/[issueNumber]
 
-### 頁面以及Layout說明:
+### 架構設計與解說:
+#### 首頁
+每個頁面都有一個共用的 Navbar，這個 Navbar 包含了一個頭像圖標，放置在右上角。當使用者點擊這個頭像圖標時，會觸發登入操作。
+點擊頭像圖標後，用戶將被導向 GitHub 登入頁面 ---> 獲取accessToken ---> accessToken用來識別用戶身份，它將被用於之後需驗證的API請求
 
-每個頁面都會有Navbar 
+首頁會有Search Input 可以輸入使用者名稱 ---> 點擊搜索 ---> 前往搜尋頁面
 
-首頁會有Search Input 可以輸入使用者名稱進行搜索
+### 
