@@ -31,3 +31,4 @@
 ```
 https://github.com/YouyuLisng/dcard-demo.git
 ```
+- 在終端機移動到
