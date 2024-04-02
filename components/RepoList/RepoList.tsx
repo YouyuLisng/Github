@@ -5,7 +5,6 @@ import { IssuesItemSkeleton } from '@/components/Skeleton/IssuesItemSkeleton';
 import { Repository } from '@/type/type';
 import RepoItem from '@/components/RepoList/RepoItem';
 import { useRepoData } from '@/Context/RepoContext';
-import EmptyState from '@/components/EmptyState';
 
 interface RepoListProps {
     username: string;
