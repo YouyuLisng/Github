@@ -18,8 +18,8 @@ const UserMenu = () => {
     useEffect(() => {
         const code = new URLSearchParams(window.location.search).get('code');
         if (code) {
-            const clientId = '1d6c5925798aa7391380';
-            const clientSecret = '9e733dd6bc55c1034ecf7b76796134f98e4e08ff';
+            const clientId = process.env.GITHUB_ID;
+            const clientSecret = process.env.GITHUB_SECRET;            
             const data = {
                 client_id: clientId,
                 client_secret: clientSecret,
