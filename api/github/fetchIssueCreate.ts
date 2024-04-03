@@ -38,4 +38,4 @@ async function fetchIssueCreate({
         .catch((error) => null);
 }
 
-export { fetchIssueCreate };
+export { type fetchIssueCreateParams, fetchIssueCreate };
