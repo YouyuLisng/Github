@@ -25,7 +25,7 @@ async function fetchIssueDelete({
         }
     );
 
-    return fetch(request, { cache: 'no-store' })
+    return fetch(request)
         .then((res) => {
             if (!res.ok) {
                 throw new Error(
