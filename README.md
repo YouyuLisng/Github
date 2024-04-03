@@ -35,7 +35,7 @@
     ```
     cd dcard-demo
     ```
-3. 請依序順序執行下方指令：
+3. 請依序執行下方指令：
     ```
     npm i
     ```
@@ -62,7 +62,7 @@
 使用 Context 共享狀態，它可以讓某個值在整個應用程序中被訪問，而不需要一層一層地傳遞 props。例如全域可以取得 accessToken 的好處，可以讓需要使用 accessToken 的組件輕鬆的獲取值。提高代碼的可讀性和維護性，因為資料都在 Context 集中管理，而不是分散在各個組件中。
 
 #### RootLayout
-- 最頂層的 layout.tsx 設置每個頁面共用的組件，Context 的 Provider 也在此引入，因為是 Layout 在此引入可以使整個應用都可以獲取資料。
+- 最頂層的 layout.tsx 設置每個頁面共用的組件，Context 的 Provider 也在此引入，因為在此引入可以使整個應用都可以獲取資料。
 - 每個頁面都有一個共用的 Navbar，這個 Navbar 包含了一個頭像圖標，放置在右上角。當使用者點擊這個頭像圖標時，會觸發登入操作。
 - 點擊頭像圖標後，用戶將被導向 GitHub 登入頁面 ---> 獲取 accessToken ---> accessToken 用來識別用戶身份，它將被用於之後需驗證的 API 請求。
 
