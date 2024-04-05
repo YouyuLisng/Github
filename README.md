@@ -68,3 +68,4 @@
 
 #### 首頁 (HomePage)
 - 首頁會有 Search Input 可以輸入使用者名稱 ---> 點擊搜索 ---> 前往搜尋頁面
+![首頁](https://dcard-demo.vercel.app/demo/Home.png)
