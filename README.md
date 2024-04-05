@@ -69,3 +69,18 @@
 #### 首頁 (HomePage)
 - 首頁會有 Search Input 可以輸入使用者名稱 ---> 點擊搜索 ---> 前往搜尋頁面
 ![首頁](https://dcard-demo.vercel.app/demo/Home.png)
+
+#### 使用者頁面 列表資料(倉儲資料)
+- 使用者頁面會有使用者的資訊以及公開的倉儲，往下滾動可以請求更多資料，若沒有資料可以顯示最下面會出現沒有更多資料了
+![使用者列表](https://dcard-demo.vercel.app/demo/Home.png)
+![沒有更多資料](https://dcard-demo.vercel.app/demo/Home.png)
+
+#### 使用者倉儲頁面 列表資料(Issues資料 每個Issues視為一個文章)
+- 使用者倉儲頁面會有使用者資料以及該倉儲的Issues評論列表，往下滾動一樣可以請求更多資料，若沒有Issues可以顯示就會顯示 沒有更多文章了
+- 有登入的使用者可以在倉儲發布文章
+![使用者倉儲頁面](https://dcard-demo.vercel.app/demo/Home.png)
+![沒有更多文章](https://dcard-demo.vercel.app/demo/Home.png)
+
+#### Issues詳細內容頁面
+- Issues詳細內容頁面會渲染該Issues的全部內容，有登入的使用者可以修改自己發布的Issues或者關閉(刪除)
+![Issues詳細內容頁面](https://dcard-demo.vercel.app/demo/Home.png)
