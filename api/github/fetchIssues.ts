@@ -12,7 +12,7 @@ interface FetchIssuesParams {
 async function fetchIssues({
     userName,
     repoName,
-    token = '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',
+    token = '',
     query = {
         sort: 'created',
         page: 1,
