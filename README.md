@@ -29,7 +29,7 @@
 ## 如何啟動專案
 1. 請通過 git clone 複製下方網址複製儲存庫：
     ```
-    https://github.com/YouyuLisng/dcard-demo.git
+    git clone https://github.com/YouyuLisng/dcard-demo.git
     ```
 2. 在終端機移動到儲存庫的資料夾或者將下載的檔案拉取到終端機：
     ```
