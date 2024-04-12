@@ -44,7 +44,6 @@ export default function Issues({
                 const markdownResponse = await fetch(`https://raw.githubusercontent.com/${userName}/${repoName}/master/README.md`);
                 const markdown = await markdownResponse.text();
                 
-                // 使用Promise.all等待所有非同步操作完成後再設置狀態
                 Promise.all([issueData, markdown]).then(([issue, readme]) => {
                     setIssue(issue);
                     setReadme(readme);
