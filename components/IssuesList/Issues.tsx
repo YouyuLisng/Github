@@ -14,6 +14,7 @@ import { fetchIssueDelete } from '@/api/github/fetchIssueDelete'
 import { useAuthContext } from '@/Context/AuthContext';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import MarkdownViewer from '../Markdown';
 
 interface IssuesProps {
     userName: string;
@@ -28,26 +29,35 @@ export default function Issues({
 }: IssuesProps) {
     const router = useRouter();
     const [issue, setIssue] = useState<GitHubIssue | null>(null);
+    const [readme, setReadme] = useState('');
     const [loading, setLoading] = useState<boolean>(true);
     const { currentUser, accessToken } = useAuthContext();
 
     useEffect(() => {
         const fetchIssueData = async () => {
             try {
-                const data = await fetchIssuesId({
+                const issueData = await fetchIssuesId({
                     userName: userName,
                     repoName: repoName,
                     issuesNumber: issue_number
                 });
-                setIssue(data);
+                const markdownResponse = await fetch(`https://raw.githubusercontent.com/${userName}/${repoName}/master/README.md`);
+                const markdown = await markdownResponse.text();
+                
+                // 使用Promise.all等待所有非同步操作完成後再設置狀態
+                Promise.all([issueData, markdown]).then(([issue, readme]) => {
+                    setIssue(issue);
+                    setReadme(readme);
+                });
             } catch (error) {
-                console.error('Error fetching issue:', error);
+                console.error('Error fetching data:', error);
+                // 在這裡設置錯誤狀態
             } finally {
                 setLoading(false);
             }
         };
         fetchIssueData();
-    }, [userName, repoName, issue_number]);
+    }, [userName, repoName, issue_number]);    
 
     const closeIssue = async () => {
         try {
@@ -104,7 +114,6 @@ export default function Issues({
                             <h1 className='text-md md:text-3xl mb-4'>{issue.title}</h1>
                             <Time time={issue.created_at} />
                             <div className='mt-4 text-xs md:text-sm text-zinc-500' dangerouslySetInnerHTML={{ __html: issue.body }}>
-                                
                             </div>
                         </div>
                     </>

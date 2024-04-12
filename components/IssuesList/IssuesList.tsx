@@ -6,7 +6,6 @@ import { GitHubIssue } from '@/type/type';
 import IssuesItem from '@/components/IssuesList/IssuesItem';
 import { IssuesFormModal } from '../Modal/IssuesFormModal';
 import { useIssuesData } from '@/Context/IssuesContext';
-import EmptyState from '@/components/EmptyState';
 
 interface IssuesListProps {
     userName: string;

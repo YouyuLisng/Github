@@ -12,7 +12,7 @@ interface FetchIssuesParams {
 async function fetchIssues({
     userName,
     repoName,
-    token = '',
+    token = process.env.GITHUB_ACCESS_TOKEN,
     query = {
         sort: 'created',
         page: 1,
