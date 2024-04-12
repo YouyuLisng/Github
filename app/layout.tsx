@@ -18,7 +18,7 @@ export default function RootLayout({
     children,
 }: RootLayoutProps) {
     return (
-        <html lang="en">
+        <html lang="zh-Hant">
             <body className={inter.className}>
                 <AuthProvider>
                     <RepoDataProvider>
